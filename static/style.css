@@ -1,0 +1,34 @@
+:root {
+  --background-color: rgb(255, 255, 255);
+  --font-titles: Arial, sans-serif;
+  --font-content: Arial, sans-serif;
+  --font-content-color: rgb(0, 0, 0);
+}
+
+body,
+html {
+  background-color: var(--background-color);
+  font-family: var(--font-content);
+  color: var(--font-content-color);
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  top: 0;
+  position: sticky;
+  background-color: #000000bc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 90;
+}
+
+.header-nav {
+  display: flex;
+  gap: 10px;
+}
