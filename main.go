@@ -11,15 +11,17 @@ import (
 func main() {
   r := gin.Default()
 
+  // Load the templates 
+  r.LoadHTMLGlob("templates/*.html")
+  // Serve any static file
+  r.Static("/static","./static")
+
   db := database.InitDB("./uka.db")
   defer db.Close()
 
-  r.GET("/ping", func(c *gin.Context) {
-    c.JSON(http.StatusOK, gin.H{
-      "message": "pong",
-    })
+  r.GET("/", func(c *gin.Context) {
+    c.HTML(http.StatusAccepted, "index.html" , gin.H{})
   })
-
 
   r.Run() 
 }
