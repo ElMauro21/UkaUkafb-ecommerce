@@ -1,34 +1,73 @@
 :root {
-  --background-color: rgb(255, 255, 255);
-  --font-titles: Arial, sans-serif;
-  --font-content: Arial, sans-serif;
-  --font-content-color: rgb(0, 0, 0);
+    --background-color: rgb(255, 255, 255);
+    --font-titles: 'Concert One', sans-serif;
+    --font-content: Arial, sans-serif;
+    --font-content-color: rgb(0, 0, 0);
 }
 
 body,
 html {
-  background-color: var(--background-color);
-  font-family: var(--font-content);
-  color: var(--font-content-color);
-  scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
+    background-color: var(--background-color);
+    font-family: var(--font-content);
+    color: var(--font-content-color);
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 
 /* Header */
 header {
-  top: 0;
-  position: sticky;
-  background-color: #000000bc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 90;
+    top: 0;
+    background-color: #000000d8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 21px;
+    z-index: 99;
+}
+
+.header-container-logo-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.header-logo {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.05s;
+}
+
+.header-logo:hover {
+    transform: scale(1.1);
+}
+
+.header-title {
+    font-family: var(--font-titles);
+    color: white;
 }
 
 .header-nav {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 2px;
+}
+
+.header-nav-button {
+    background-color: transparent;
+    border: none;
+    font-size: 21px;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 10%;
+    transform: translateZ(0) scale(0.9);
+    transition: background-size 1s ease, transform 1s ease;
+}
+
+.header-nav-button:hover {
+    background-color: rgb(228, 88, 44);
+    transition: background-size 1s;
+    transform: translateZ(30px) scale(1);
 }

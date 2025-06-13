@@ -3,6 +3,7 @@
 <html lang="es">
   <head>
     <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="utf-8" />
     <title>UkaUka fb</title>
     <meta name="robots" content="index" />
     <!--Responsive-->
@@ -13,18 +14,43 @@
       content="UkaUka fabrica de obstaculos para
     fingerboard"
     />
-    <meta charset="utf-8" />
+    <!--Icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pVIyEk3h6Jxj...YOUR_INTEGRITY_HASH..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Concert+One&family=Fredoka:wght@300..700&family=Lilita+One&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
-      <img src="/static/images/LogInIcon.png" alt="logo" width="41px" />
-      <h1>UkaUka<sub>fb</sub></h1>
+      <div class="header-container-logo-title">
+        <button class="header-logo">
+          <img src="/static/images/logo.png" alt="logo" width="51px" />
+        </button>
+        <h1 class="header-title">UkaUka<sup>fb</sup></h1>
+      </div>
       <nav class="header-nav">
-        <img src="/static/images/LogInIcon.png" width="41px" />
-        <img src="/static/images/LogInIcon.png" width="41px" />
-        <img src="/static/images/LogInIcon.png" width="41px" />
+        <button class="header-nav-button">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+        <button class="header-nav-button">
+          <i class="fa-solid fa-user"></i>
+        </button>
+        <button class="header-nav-button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </nav>
     </header>
+    <div class="division"></div>
     {{ block "content" . }}{{ end }}
   </body>
   <footer></footer>
