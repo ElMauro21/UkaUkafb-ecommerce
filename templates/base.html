@@ -33,7 +33,7 @@
   <body>
     <header>
       <div class="header-container-logo-title">
-        <button class="header-logo">
+        <button class="header-logo" onclick="window.location.href='/'">
           <img src="/static/images/logo.png" alt="logo" width="51px" />
         </button>
         <h1 class="header-title">UkaUka<sup>fb</sup></h1>
@@ -42,7 +42,10 @@
         <button class="header-nav-button">
           <i class="fa-solid fa-cart-shopping"></i>
         </button>
-        <button class="header-nav-button">
+        <button
+          class="header-nav-button"
+          onclick="window.location.href='/login'"
+        >
           <i class="fa-solid fa-user"></i>
         </button>
         <button class="header-nav-button">
@@ -51,8 +54,8 @@
       </nav>
     </header>
     <div class="division"></div>
-    {{ block "content" . }}{{ end }}
+    {{ block "content" . }}{{ end }} {{end}} {{define "footer"}}
+    <footer>This is the footer</footer>
   </body>
-  <footer></footer>
 </html>
 {{end}}

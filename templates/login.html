@@ -1,0 +1,22 @@
+{{ template "base" .}}
+<div class="wraper-login">
+  <form>
+    <h1>Login</h1>
+    <div class="input-box">
+      <i class="fa-solid fa-user"></i>
+      <input type="email" placeholder="Email" required />
+    </div>
+    <div class="input-box">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" placeholder="Contraseña" required />
+    </div>
+    <div class="forgot">
+      <a href="#">Olvidaste la contraseña?</a>
+    </div>
+    <button class="btn" type="submit">Login</button>
+    <div class="register-link">
+      <p>No tienes una cuenta? <a href="#">Register</a></p>
+    </div>
+  </form>
+</div>
+{{template "footer" .}}

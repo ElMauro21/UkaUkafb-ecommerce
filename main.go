@@ -20,7 +20,11 @@ func main() {
   defer db.Close()
 
   r.GET("/", func(c *gin.Context) {
-    c.HTML(http.StatusAccepted, "index.html" , gin.H{})
+    c.HTML(http.StatusOK, "index.html" , gin.H{})
+  })
+
+  r.GET("/login", func(c *gin.Context) {
+    c.HTML(http.StatusOK, "login.html" , gin.H{})
   })
 
   r.Run() 
