@@ -1,16 +1,41 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/ElMauro21/UkaUkafb/database"
 	"github.com/ElMauro21/UkaUkafb/handlers"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
+    err := godotenv.Load()
+  if err !=nil {
+    log.Println("No .env file found")
+  }
+
+  secret := os.Getenv("SESSION_SECRET")
+  if secret == ""{
+    log.Fatal("SESSION_SECRET is not set")
+  }
+
+  store := cookie.NewStore([]byte(secret))
+  store.Options(sessions.Options{
+	Path:     "/",        // Cookie is valid for all paths
+	MaxAge:   3600,       // 1 hour
+	HttpOnly: true,       // Not accessible from JS (security)
+	Secure:   false,      // Use true to security
+  })
+
   r := gin.Default()
+
+  r.Use(sessions.Sessions("mysession",store))
 
   // Load the templates 
   r.LoadHTMLGlob("templates/*.html")
@@ -26,8 +51,12 @@ func main() {
     c.HTML(http.StatusOK, "index.html" , gin.H{})
   })
 
+  // Auth routes
   r.GET("/login", handlers.HandleOpenLogin)
-
+  r.GET("/logout",handlers.HandleLogout)
+  r.POST("/login",func(c *gin.Context){
+    handlers.HandleLogin(c,db)
+  })
   r.POST("/register",func(c *gin.Context){
     handlers.HandleRegister(c,db)
   })

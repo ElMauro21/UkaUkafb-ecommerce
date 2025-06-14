@@ -11,34 +11,38 @@
         >
         <h2 class="form-title">Inicia sesion!</h2>
       </div>
-      <!--Mail-->
-      <div class="input-box">
-        <input
-          type="email"
-          class="input-field"
-          placeholder="Correo electronico"
-          required
-        />
-        <i class="fa-solid fa-envelope"></i>
-      </div>
-      <!--Password-->
-      <div class="input-box">
-        <input
-          type="password"
-          class="input-field"
-          placeholder="Contraseña"
-          required
-        />
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <div class="input-box">
-        <input
-          type="submit"
-          class="submit"
-          placeholder="Inicia sesion"
-          required
-        />
-      </div>
+      <form action="/login" method="post">
+        <!--Mail-->
+        <div class="input-box">
+          <input
+            name="log-email"
+            type="email"
+            class="input-field"
+            placeholder="Correo electronico"
+            required
+          />
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <!--Password-->
+        <div class="input-box">
+          <input
+            name="log-password"
+            type="password"
+            class="input-field"
+            placeholder="Contraseña"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="submit"
+            class="submit"
+            placeholder="Inicia sesion"
+            required
+          />
+        </div>
+      </form>
       <div class="bottom">
         <span>
           Olvidaste tu contraseña?

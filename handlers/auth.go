@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -12,6 +13,40 @@ import (
 func HandleOpenLogin(c *gin.Context){
 	c.HTML(http.StatusOK,"login.html",gin.H{
 	})
+}
+
+func HandleLogin(c *gin.Context, db *sql.DB){
+	email := c.PostForm("log-email")
+	password := c.PostForm("log-password")
+
+	var storedHash string
+	var isAdmin int
+
+	err := db.QueryRow("SELECT password_hash, is_admin FROM users WHERE email = ?", email).Scan(&storedHash, &isAdmin)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Wrong user or password.")
+		return
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(storedHash),[]byte(password))
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Wrong user or password.")
+		return
+	}
+
+	session := sessions.Default(c)
+	session.Set("user", email)
+	session.Set("admin", isAdmin == 1)
+	session.Set("loggedIn", true)
+	session.Save()
+	c.Redirect(http.StatusSeeOther,"/")
+}
+
+func HandleLogout(c *gin.Context){
+	session := sessions.Default(c)
+	session.Clear()
+	session.Save()
+	c.Redirect(http.StatusSeeOther, "/login")
 }
 
 func HandleRegister(c *gin.Context, db *sql.DB){
