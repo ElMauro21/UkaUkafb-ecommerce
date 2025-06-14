@@ -20,6 +20,8 @@ func main() {
   db := database.InitDB("./uka.db")
   defer db.Close()
 
+  handlers.HandleCreateAdminUser(db)
+
   r.GET("/", func(c *gin.Context) {
     c.HTML(http.StatusOK, "index.html" , gin.H{})
   })

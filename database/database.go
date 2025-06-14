@@ -24,8 +24,8 @@ mustExec(db,`
 CREATE TABLE IF NOT EXISTS users(
 id	INTEGER PRIMARY KEY AUTOINCREMENT,
 names 	TEXT NOT NULL,
-surnames TEXT NOT NULL,
-id_number TEXT NOT NULL,
+surnames TEXT,
+id_number TEXT,
 phone TEXT, 
 email TEXT NOT NULL UNIQUE,
 state TEXT,
