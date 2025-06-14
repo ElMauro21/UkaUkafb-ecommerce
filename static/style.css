@@ -78,7 +78,7 @@ header {
     transform: translateZ(30px) scale(1);
 }
 
-/* ----- Login and register forms ----- */
+/* ----- Forms forms ----- */
 
 .content {
     flex: 1;
@@ -101,7 +101,8 @@ header {
 }
 
 .register-container,
-.login-container {
+.login-container,
+.recover-container {
     position: absolute;
     width: 500px;
     display: flex;
@@ -117,6 +118,10 @@ header {
 
 .login-container {
     left: 4px;
+}
+
+.recover-container {
+    top: -520px;
 }
 
 .top span {
@@ -217,7 +222,8 @@ header {
     }
 
     .register-container,
-    .login-container {
+    .login-container,
+    .recover-container {
         width: 90%;
         padding: 0 20px 0 10px;
     }

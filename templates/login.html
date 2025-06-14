@@ -2,6 +2,41 @@
 <!-- ===== Forms ===== -->
 <div class="content">
   <div class="form-box">
+    <!-- ===== Recovery form ===== -->
+    <div class="recover-container" id="recover">
+      <div class="top">
+        <span>Te enviaremos instrucciones para cambiar tu contraseña.</span>
+        <h2 class="form-title">Recupera tu contraseña!</h2>
+      </div>
+      <form action="/recover" method="post">
+        <!--Mail-->
+        <div class="input-box">
+          <input
+            name="recover-email"
+            type="email"
+            class="input-field"
+            placeholder="Correo electronico"
+            required
+          />
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="submit"
+            class="submit"
+            placeholder="Recuperar"
+            required
+          />
+        </div>
+      </form>
+      <div class="bottom">
+        <span>
+          Si no tienes problemas con tu contraseña inicia sesion.
+          <a href="#" onclick="recoverLogin()"> Log in</a></span
+        >
+      </div>
+    </div>
+
     <!-- ===== Login form ===== -->
     <div class="login-container" id="login">
       <div class="top">
@@ -46,7 +81,7 @@
       <div class="bottom">
         <span>
           Olvidaste tu contraseña?
-          <a href="#"> Recuperar contraseña</a></span
+          <a href="#" onclick="recover()"> Recuperar contraseña</a></span
         >
         <p>
           Ventajas de iniciar sesion:<br />
