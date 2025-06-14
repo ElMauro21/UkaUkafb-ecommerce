@@ -25,12 +25,16 @@
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Concert+One&family=Fredoka:wght@300..700&family=Lilita+One&family=Luckiest+Guy&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap"
       rel="stylesheet"
     />
+    <script src="/static/script.js" defer></script>
   </head>
   <body>
+    <!-- ===== Header ===== -->
     <header>
       <div class="header-container-logo-title">
         <button class="header-logo" onclick="window.location.href='/'">
@@ -53,8 +57,8 @@
         </button>
       </nav>
     </header>
-    <div class="division"></div>
     {{ block "content" . }}{{ end }} {{end}} {{define "footer"}}
+    <!-- ===== Footer ===== -->
     <footer>This is the footer</footer>
   </body>
 </html>

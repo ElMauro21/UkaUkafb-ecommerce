@@ -1,22 +1,142 @@
 {{ template "base" .}}
-<div class="wraper-login">
-  <form>
-    <h1>Login</h1>
-    <div class="input-box">
-      <i class="fa-solid fa-user"></i>
-      <input type="email" placeholder="Email" required />
+<!-- ===== Forms ===== -->
+<div class="content">
+  <div class="form-box">
+    <!-- ===== Login form ===== -->
+    <div class="login-container" id="login">
+      <div class="top">
+        <span>
+          No tienes una cuenta?
+          <a href="#" onclick="register()">Registrate</a></span
+        >
+        <h2 class="form-title">Inicia sesion!</h2>
+      </div>
+      <!--Mail-->
+      <div class="input-box">
+        <input
+          type="email"
+          class="input-field"
+          placeholder="Correo electronico"
+          required
+        />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <!--Password-->
+      <div class="input-box">
+        <input
+          type="password"
+          class="input-field"
+          placeholder="Contraseña"
+          required
+        />
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="input-box">
+        <input
+          type="submit"
+          class="submit"
+          placeholder="Inicia sesion"
+          required
+        />
+      </div>
+      <div class="bottom">
+        <span>
+          Olvidaste tu contraseña?
+          <a href="#"> Recuperar contraseña</a></span
+        >
+        <p>
+          Ventajas de iniciar sesion:<br />
+          <br />
+          1. Guarda tus datos para futuras compras <br />
+          2. Revisa tus ordenes y sigue tus envios
+        </p>
+      </div>
     </div>
-    <div class="input-box">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" placeholder="Contraseña" required />
+
+    <!-- ===== Registration form ===== -->
+    <div class="register-container" id="register">
+      <div class="top">
+        <span> Tienes una cuenta? <a href="#" onclick="login()">Login</a></span>
+        <h2 class="form-title">Registrate!</h2>
+      </div>
+      <!--Name-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Nombres" required />
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <!--Surname-->
+      <div class="input-box">
+        <input
+          type="text"
+          class="input-field"
+          placeholder="Apellidos"
+          required
+        />
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <!--Id-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Documento" />
+        <i class="fa-solid fa-id-card"></i>
+      </div>
+      <!--Phone-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Telefono" />
+        <i class="fa-solid fa-phone"></i>
+      </div>
+      <!--Mail-->
+      <div class="input-box">
+        <input
+          type="email"
+          class="input-field"
+          placeholder="Correo electronico"
+          required
+        />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <!--State-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Departamento" />
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <!--City-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Ciudad" />
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <!--Neighborhood-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Barrio" />
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <!--Address-->
+      <div class="input-box">
+        <input type="text" class="input-field" placeholder="Direccion" />
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <!--Passwords-->
+      <div class="input-box">
+        <input
+          type="password"
+          class="input-field"
+          placeholder="Contraseña"
+          required
+        />
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="input-box">
+        <input
+          type="password"
+          class="input-field"
+          placeholder="Repite la contraseña"
+          required
+        />
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="input-box">
+        <input type="submit" class="submit" placeholder="Registrate" required />
+      </div>
     </div>
-    <div class="forgot">
-      <a href="#">Olvidaste la contraseña?</a>
-    </div>
-    <button class="btn" type="submit">Login</button>
-    <div class="register-link">
-      <p>No tienes una cuenta? <a href="#">Register</a></p>
-    </div>
-  </form>
+  </div>
 </div>
 {{template "footer" .}}
