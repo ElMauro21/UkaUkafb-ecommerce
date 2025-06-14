@@ -25,12 +25,13 @@ CREATE TABLE IF NOT EXISTS users(
 id	INTEGER PRIMARY KEY AUTOINCREMENT,
 names 	TEXT NOT NULL,
 surnames TEXT NOT NULL,
+id_number TEXT NOT NULL,
+phone TEXT, 
+email TEXT NOT NULL UNIQUE,
 state TEXT,
 city TEXT,
 neighborhood TEXT,
 address TEXT,
-phone TEXT, 
-email TEXT NOT NULL UNIQUE,
 password_hash TEXT NOT NULL,
 is_admin INTEGER NOT NULL DEFAULT 0
 );`)

@@ -59,83 +59,132 @@
         <span> Tienes una cuenta? <a href="#" onclick="login()">Login</a></span>
         <h2 class="form-title">Registrate!</h2>
       </div>
-      <!--Name-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Nombres" required />
-        <i class="fa-solid fa-user"></i>
-      </div>
-      <!--Surname-->
-      <div class="input-box">
-        <input
-          type="text"
-          class="input-field"
-          placeholder="Apellidos"
-          required
-        />
-        <i class="fa-solid fa-user"></i>
-      </div>
-      <!--Id-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Documento" />
-        <i class="fa-solid fa-id-card"></i>
-      </div>
-      <!--Phone-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Telefono" />
-        <i class="fa-solid fa-phone"></i>
-      </div>
-      <!--Mail-->
-      <div class="input-box">
-        <input
-          type="email"
-          class="input-field"
-          placeholder="Correo electronico"
-          required
-        />
-        <i class="fa-solid fa-envelope"></i>
-      </div>
-      <!--State-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Departamento" />
-        <i class="fa-solid fa-location-dot"></i>
-      </div>
-      <!--City-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Ciudad" />
-        <i class="fa-solid fa-location-dot"></i>
-      </div>
-      <!--Neighborhood-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Barrio" />
-        <i class="fa-solid fa-location-dot"></i>
-      </div>
-      <!--Address-->
-      <div class="input-box">
-        <input type="text" class="input-field" placeholder="Direccion" />
-        <i class="fa-solid fa-location-dot"></i>
-      </div>
-      <!--Passwords-->
-      <div class="input-box">
-        <input
-          type="password"
-          class="input-field"
-          placeholder="Contraseña"
-          required
-        />
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <div class="input-box">
-        <input
-          type="password"
-          class="input-field"
-          placeholder="Repite la contraseña"
-          required
-        />
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <div class="input-box">
-        <input type="submit" class="submit" placeholder="Registrate" required />
-      </div>
+      <form action="/register" method="post">
+        <!--Name-->
+        <div class="input-box">
+          <input
+            name="name"
+            type="text"
+            class="input-field"
+            placeholder="Nombres"
+            required
+          />
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <!--Surname-->
+        <div class="input-box">
+          <input
+            name="surname"
+            type="text"
+            class="input-field"
+            placeholder="Apellidos"
+            required
+          />
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <!--Id-->
+        <div class="input-box">
+          <input
+            name="id-number"
+            type="text"
+            class="input-field"
+            placeholder="Documento"
+          />
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <!--Phone-->
+        <div class="input-box">
+          <input
+            name="phone"
+            type="text"
+            class="input-field"
+            placeholder="Telefono"
+          />
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <!--Mail-->
+        <div class="input-box">
+          <input
+            name="reg-mail"
+            type="email"
+            class="input-field"
+            placeholder="Correo electronico"
+            required
+          />
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <!--State-->
+        <div class="input-box">
+          <input
+            name="state"
+            type="text"
+            class="input-field"
+            placeholder="Departamento"
+          />
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <!--City-->
+        <div class="input-box">
+          <input
+            name="city"
+            type="text"
+            class="input-field"
+            placeholder="Ciudad"
+          />
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <!--Neighborhood-->
+        <div class="input-box">
+          <input
+            name="neighborhood"
+            type="text"
+            class="input-field"
+            placeholder="Barrio"
+          />
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <!--Address-->
+        <div class="input-box">
+          <input
+            name="address"
+            type="text"
+            class="input-field"
+            placeholder="Direccion"
+          />
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <!--Passwords-->
+        <div class="input-box">
+          <input
+            name="reg-password1"
+            type="password"
+            minlength="8"
+            class="input-field"
+            placeholder="Contraseña (8 o más caracteres)"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="input-box">
+          <input
+            name="reg-password2"
+            type="password"
+            minlength="8"
+            class="input-field"
+            placeholder="Repite la contraseña"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="submit"
+            class="submit"
+            placeholder="Registrate"
+            required
+          />
+        </div>
+      </form>
     </div>
   </div>
 </div>
