@@ -1,9 +1,15 @@
 package handlers
 
 import (
+	"crypto/rand"
 	"database/sql"
+	"encoding/hex"
+	"fmt"
 	"log"
 	"net/http"
+	"net/smtp"
+	"os"
+	"time"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -46,7 +52,7 @@ func HandleLogout(c *gin.Context){
 	session := sessions.Default(c)
 	session.Clear()
 	session.Save()
-	c.Redirect(http.StatusSeeOther, "/login")
+	c.Redirect(http.StatusSeeOther, "/auth/login")
 }
 
 func HandleRegister(c *gin.Context, db *sql.DB){
@@ -82,7 +88,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 		return
 	}
 	
-	c.Redirect(http.StatusSeeOther,"/login")
+	c.Redirect(http.StatusSeeOther,"/auth/login")
 }
 
 func HandleCreateAdminUser(db *sql.DB){
@@ -101,4 +107,111 @@ func HandleCreateAdminUser(db *sql.DB){
 	if err != nil {
 		log.Printf("Failed to create admin user: %v", err)
 	}
+}
+
+func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
+	email:= c.PostForm("recover-email")
+
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
+	if err != nil{
+		c.String(http.StatusInternalServerError, "Database error.")
+		return 
+	}
+	
+	if count == 0{
+		c.String(http.StatusOK, "If this email exists, a recovery email has been sent.")
+		return 
+	}
+
+	token, err := generateResetToken(32)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Can not create reset token.")
+		return
+	}
+
+	expiresAt := time.Now().Add(15 * time.Minute)
+	_, err = db.Exec(`INSERT INTO password_resets 
+	(email, token, expires_at) VALUES (?, ?, ?)`,
+	 email,token,expiresAt)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to store reset token.")
+		return
+	}
+
+	resetLink := fmt.Sprintf("http://localhost:8080/auth/recover/reset?token=%s", token)
+	
+	c.Set("reset_link",resetLink)
+	c.Set("reset_email",email)
+
+	if err := sendRecoveryEmail(c); err != nil {
+	log.Println("Failed to send recovery email:", err)
+	c.String(http.StatusInternalServerError, "Could not send recovery email.")
+	return
+	}
+
+	c.Redirect(http.StatusSeeOther,"/auth/login")
+}
+
+func generateResetToken(n int) (string, error){
+	bytes := make([]byte,n)
+	_,err := rand.Read(bytes)
+	if err != nil {
+		return "",err
+	}
+	return hex.EncodeToString(bytes),nil
+}
+
+func sendRecoveryEmail(c *gin.Context) error {
+	
+	emailRaw, emailExists := c.Get("reset_email")
+	resetLink, linkExists := c.Get("reset_link")
+	
+	if !emailExists || !linkExists{
+		return fmt.Errorf("context data missing: reset_email or reset_link not set")
+	}
+
+	email, ok := emailRaw.(string)
+	if !ok {
+		return fmt.Errorf("email in context is not a string")
+	}
+	
+	password := os.Getenv("SMTP_PASSWORD")
+  	if password == ""{
+    	log.Fatal("SMTP_PASSWORD is not set")
+  	}
+
+	var(
+		smtpHost = "smtp.gmail.com"
+		smtpPort = "587"
+		smtpUsername = "mauro311095@gmail.com"
+	)
+	
+	from := smtpUsername
+	to := []string{email}
+
+	subject := "Subject: Recuperar contraseña\n"
+	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
+	
+	htmlBody := fmt.Sprintf(`
+	<html>
+  		<body>
+		<img src="https://i.postimg.cc/jjkv7qRM/temp-Imagey0-Jawd.avif" alt="Company banner" width="100" />
+    		<p>Hola,</p>
+    		<p>Has solicitado recuperar tu contraseña. Haz clic en el siguiente botón para restablecerla:</p>
+    		<a href="%s" style="display:inline-block;padding:10px 15px;background-color:#007BFF;color:white;text-decoration:none;border-radius:5px;">Restablecer contraseña</a>
+    		<p>Si no solicitaste esto, puedes ignorar este mensaje.</p>
+  		</body>
+	</html>
+	`, resetLink)
+
+	message := []byte(subject + mime + htmlBody )
+
+	auth := smtp.PlainAuth("", from, password, smtpHost)
+
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -62,6 +62,13 @@ quantity INTEGER NOT NULL DEFAULT 1,
 FOREIGN KEY(cart_id) REFERENCES carts(id),
 FOREIGN KEY(product_id) REFERENCES products(id)
 );`)
+mustExec(db,`
+CREATE TABLE IF NOT EXISTS password_resets(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+email TEXT NOT NULL,
+token TEXT NOT NULL,
+expires_at DATETIME NOT NULL
+);`)
 }
 
 // helper: panic if migration fails

@@ -8,7 +8,7 @@
         <span>Te enviaremos instrucciones para cambiar tu contraseña.</span>
         <h2 class="form-title">Recupera tu contraseña!</h2>
       </div>
-      <form action="/recover" method="post">
+      <form action="/auth/recover/initiate" method="post">
         <!--Mail-->
         <div class="input-box">
           <input
@@ -46,7 +46,7 @@
         >
         <h2 class="form-title">Inicia sesion!</h2>
       </div>
-      <form action="/login" method="post">
+      <form action="/auth/login" method="post">
         <!--Mail-->
         <div class="input-box">
           <input
@@ -98,7 +98,7 @@
         <span> Tienes una cuenta? <a href="#" onclick="login()">Login</a></span>
         <h2 class="form-title">Registrate!</h2>
       </div>
-      <form action="/register" method="post">
+      <form action="/auth/register" method="post">
         <!--Name-->
         <div class="input-box">
           <input

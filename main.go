@@ -52,13 +52,16 @@ func main() {
   })
 
   // Auth routes
-  r.GET("/login", handlers.HandleOpenLogin)
-  r.GET("/logout",handlers.HandleLogout)
-  r.POST("/login",func(c *gin.Context){
+  r.GET("/auth/login", handlers.HandleOpenLogin)
+  r.POST("/auth/logout",handlers.HandleLogout)
+  r.POST("/auth/login",func(c *gin.Context){
     handlers.HandleLogin(c,db)
   })
-  r.POST("/register",func(c *gin.Context){
+  r.POST("/auth/register",func(c *gin.Context){
     handlers.HandleRegister(c,db)
+  })
+  r.POST("/auth/recover/initiate",func(c *gin.Context){
+    handlers.HandleCreateRecoveryLink(c,db)
   })
 
   r.Run() 
