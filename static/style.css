@@ -102,7 +102,8 @@ header {
 
 .register-container,
 .login-container,
-.recover-container {
+.recover-container,
+.reset-pass {
     position: absolute;
     width: 500px;
     display: flex;
@@ -122,6 +123,11 @@ header {
 
 .recover-container {
     top: -520px;
+}
+
+.reset-pass {
+    left: 4px;
+    top: 0;
 }
 
 .top span {
@@ -223,7 +229,8 @@ header {
 
     .register-container,
     .login-container,
-    .recover-container {
+    .recover-container,
+    .reset-pass {
         width: 90%;
         padding: 0 20px 0 10px;
     }

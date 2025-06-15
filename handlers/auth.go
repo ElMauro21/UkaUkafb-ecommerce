@@ -215,3 +215,53 @@ func sendRecoveryEmail(c *gin.Context) error {
 	}
 	return nil
 }
+
+func HandleShowResetForm(c *gin.Context){
+	token := c.Query("token")
+
+	c.HTML(http.StatusOK,"reset-password.html",gin.H{
+		"token": token,
+	})
+}
+
+func HandleResetPassword(c *gin.Context, db *sql.DB){
+	token := c.PostForm("token")
+	newPassword := c.PostForm("recover-pass")
+
+	if token == "" || newPassword == ""{
+		c.String(http.StatusBadRequest, "Token and password are required.")
+		return
+	}
+
+	var email string
+	var expiresAt time.Time
+	err := db.QueryRow("SELECT email, expires_at FROM password_resets WHERE token = ?", token).Scan(&email, &expiresAt)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Invalid or expired token.")
+		return
+	}
+
+	if time.Now().After(expiresAt) {
+		c.String(http.StatusBadRequest, "Token has expired.")
+		return
+	}
+
+	hash, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to update password.")
+		return
+	}
+	
+	hashedPassword := hash 
+
+	_, err = db.Exec("UPDATE users SET password_hash = ? WHERE email = ?", hashedPassword, email)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to update password.")
+		return
+	}
+
+	_, _ = db.Exec("DELETE FROM password_resets WHERE token = ?", token)
+
+	c.Redirect(http.StatusSeeOther, "/auth/login")
+
+}

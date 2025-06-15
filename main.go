@@ -53,7 +53,7 @@ func main() {
 
   // Auth routes
   r.GET("/auth/login", handlers.HandleOpenLogin)
-  r.POST("/auth/logout",handlers.HandleLogout)
+  r.GET("/auth/logout",handlers.HandleLogout)
   r.POST("/auth/login",func(c *gin.Context){
     handlers.HandleLogin(c,db)
   })
@@ -62,6 +62,10 @@ func main() {
   })
   r.POST("/auth/recover/initiate",func(c *gin.Context){
     handlers.HandleCreateRecoveryLink(c,db)
+  })
+  r.GET("/auth/recover/reset", handlers.HandleShowResetForm)
+  r.POST("/auth/recover/reset", func(c *gin.Context) {
+	  handlers.HandleResetPassword(c, db)
   })
 
   r.Run() 
