@@ -7,6 +7,7 @@ import (
 
 	"github.com/ElMauro21/UkaUkafb/database"
 	"github.com/ElMauro21/UkaUkafb/handlers"
+	"github.com/ElMauro21/UkaUkafb/jobs"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -44,6 +45,8 @@ func main() {
 
   db := database.InitDB("./uka.db")
   defer db.Close()
+
+  jobs.JobTokenCleanup(db)
 
   handlers.HandleCreateAdminUser(db)
 
