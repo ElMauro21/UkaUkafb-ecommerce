@@ -7,6 +7,7 @@ import (
 
 	"github.com/ElMauro21/UkaUkafb/database"
 	"github.com/ElMauro21/UkaUkafb/handlers"
+	"github.com/ElMauro21/UkaUkafb/handlers/admin"
 	"github.com/ElMauro21/UkaUkafb/jobs"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -48,7 +49,7 @@ func main() {
 
   jobs.JobTokenCleanup(db)
 
-  handlers.HandleCreateAdminUser(db)
+  admin.HandleCreateAdminUser(db)
 
   r.GET("/", func(c *gin.Context) {
     c.HTML(http.StatusOK, "index.html" , gin.H{})
