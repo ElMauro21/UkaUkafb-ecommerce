@@ -5,7 +5,6 @@
     <!-- ===== Recovery form ===== -->
     <div class="recover-container" id="recover">
       <div class="top">
-        <span>Te enviaremos instrucciones para cambiar tu contraseña.</span>
         <h2 class="form-title">Recupera tu contraseña!</h2>
       </div>
       <form action="/auth/recover/initiate" method="post">
@@ -15,23 +14,20 @@
             name="recover-email"
             type="email"
             class="input-field"
-            placeholder="Correo electronico"
+            placeholder="Correo electrónico"
             required
           />
           <i class="fa-solid fa-envelope"></i>
         </div>
         <div class="input-box">
-          <input
-            type="submit"
-            class="submit"
-            placeholder="Recuperar"
-            required
-          />
+          <input type="submit" class="submit" value="Recuperar" required />
         </div>
       </form>
       <div class="bottom">
+        <span>Te enviaremos instrucciones para cambiar tu contraseña.</span>
+        <br />
         <span>
-          Si no tienes problemas con tu contraseña inicia sesion.
+          Si no tienes problemas con tu contraseña inicia sesión.
           <a href="#" onclick="recoverLogin()"> Log in</a></span
         >
       </div>
@@ -42,9 +38,9 @@
       <div class="top">
         <span>
           No tienes una cuenta?
-          <a href="#" onclick="register()">Registrate</a></span
+          <a href="#" onclick="register()">Regístrate</a></span
         >
-        <h2 class="form-title">Inicia sesion!</h2>
+        <h2 class="form-title">Inicia sesión!</h2>
       </div>
       <form action="/auth/login" method="post">
         <!--Mail-->
@@ -53,7 +49,7 @@
             name="log-email"
             type="email"
             class="input-field"
-            placeholder="Correo electronico"
+            placeholder="Correo electrónico"
             required
           />
           <i class="fa-solid fa-envelope"></i>
@@ -70,12 +66,7 @@
           <i class="fa-solid fa-lock"></i>
         </div>
         <div class="input-box">
-          <input
-            type="submit"
-            class="submit"
-            placeholder="Inicia sesion"
-            required
-          />
+          <input type="submit" class="submit" value="Inicia sesión" required />
         </div>
       </form>
       <div class="bottom">
@@ -84,10 +75,10 @@
           <a href="#" onclick="recover()"> Recuperar contraseña</a></span
         >
         <p>
-          Ventajas de iniciar sesion:<br />
+          Ventajas de iniciar sesión:<br />
           <br />
           1. Guarda tus datos para futuras compras <br />
-          2. Revisa tus ordenes y sigue tus envios
+          2. Revisa tus órdenes y sigue tus envios
         </p>
       </div>
     </div>
@@ -96,7 +87,7 @@
     <div class="register-container" id="register">
       <div class="top">
         <span> Tienes una cuenta? <a href="#" onclick="login()">Login</a></span>
-        <h2 class="form-title">Registrate!</h2>
+        <h2 class="form-title">Regístrate!</h2>
       </div>
       <form action="/auth/register" method="post">
         <!--Name-->
@@ -137,7 +128,7 @@
             name="phone"
             type="text"
             class="input-field"
-            placeholder="Telefono"
+            placeholder="Teléfono"
           />
           <i class="fa-solid fa-phone"></i>
         </div>
@@ -147,7 +138,7 @@
             name="reg-mail"
             type="email"
             class="input-field"
-            placeholder="Correo electronico"
+            placeholder="Correo electrónico"
             required
           />
           <i class="fa-solid fa-envelope"></i>
@@ -188,7 +179,7 @@
             name="address"
             type="text"
             class="input-field"
-            placeholder="Direccion"
+            placeholder="Dirección"
           />
           <i class="fa-solid fa-location-dot"></i>
         </div>
@@ -216,12 +207,7 @@
           <i class="fa-solid fa-lock"></i>
         </div>
         <div class="input-box">
-          <input
-            type="submit"
-            class="submit"
-            placeholder="Registrate"
-            required
-          />
+          <input type="submit" class="submit" value="Regístrate" required />
         </div>
       </form>
     </div>
