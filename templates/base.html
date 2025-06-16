@@ -50,7 +50,12 @@
           class="header-nav-button"
           onclick="window.location.href='/auth/login'"
         >
-          <i class="fa-solid fa-user"></i>
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-user"></i>
+            {{ if .loggedIn }}
+            <i class="fa-solid fa-check login-status"></i>
+            {{ end }}
+          </div>
         </button>
         <button class="header-nav-button">
           <i class="fa-solid fa-bars"></i>

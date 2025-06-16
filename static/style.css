@@ -235,3 +235,20 @@ header {
         padding: 0 20px 0 10px;
     }
 }
+
+/* ----- Icon wrapper ----- */
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.login-status {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    background: rgb(210, 103, 51);
+    border-radius: 50%;
+    padding: 2.5px;
+}
