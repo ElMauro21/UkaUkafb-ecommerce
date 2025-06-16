@@ -144,11 +144,11 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 	c.Set("reset_link",resetLink)
 	c.Set("reset_email",email)
 
-	if err := sendRecoveryEmail(c); err != nil {
-	log.Println("Failed to send recovery email:", err)
-	c.String(http.StatusInternalServerError, "Could not send recovery email.")
-	return
-	}
+	go func(cCopy *gin.Context){
+		if err := sendRecoveryEmail(cCopy); err != nil {
+			log.Println("Failed to send recovery email:", err)
+		}
+	}(c.Copy())
 
 	c.Redirect(http.StatusSeeOther,"/auth/login")
 }
@@ -196,10 +196,10 @@ func sendRecoveryEmail(c *gin.Context) error {
 	htmlBody := fmt.Sprintf(`
 	<html>
   		<body>
-		<img src="https://i.postimg.cc/jjkv7qRM/temp-Imagey0-Jawd.avif" alt="Company banner" width="100" />
+		<img src="https://i.postimg.cc/xjXSMZYC/temp-Image-Gxql-NP.avif" alt="Company banner" width="250" />
     		<p>Hola,</p>
     		<p>Has solicitado recuperar tu contraseña. Haz clic en el siguiente botón para restablecerla:</p>
-    		<a href="%s" style="display:inline-block;padding:10px 15px;background-color:#007BFF;color:white;text-decoration:none;border-radius:5px;">Restablecer contraseña</a>
+    		<a href="%s" style="display:inline-block;padding:10px 15px;background-color:rgb(210, 103, 51);color:white;text-decoration:none;border-radius:5px;">Restablecer contraseña</a>
     		<p>Si no solicitaste esto, puedes ignorar este mensaje.</p>
   		</body>
 	</html>
