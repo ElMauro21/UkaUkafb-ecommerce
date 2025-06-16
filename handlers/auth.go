@@ -150,7 +150,7 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 		}
 	}(c.Copy())
 
-	c.Redirect(http.StatusSeeOther,"/auth/login")
+	c.String(http.StatusOK, "If this email exists, a recovery email has been sent.")
 }
 
 func generateResetToken(n int) (string, error){
@@ -194,16 +194,24 @@ func sendRecoveryEmail(c *gin.Context) error {
 	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	
 	htmlBody := fmt.Sprintf(`
-	<html>
-  		<body>
-		<img src="https://i.postimg.cc/xjXSMZYC/temp-Image-Gxql-NP.avif" alt="Company banner" width="250" />
-    		<p>Hola,</p>
-    		<p>Has solicitado recuperar tu contraseña. Haz clic en el siguiente botón para restablecerla:</p>
-    		<a href="%s" style="display:inline-block;padding:10px 15px;background-color:rgb(210, 103, 51);color:white;text-decoration:none;border-radius:5px;">Restablecer contraseña</a>
-    		<p>Si no solicitaste esto, puedes ignorar este mensaje.</p>
-  		</body>
-	</html>
-	`, resetLink)
+<html>
+  <body>
+    <div style="
+      width: 100%%;
+      max-width: 600px;
+      height: 100px;
+      background-image: url('https://i.postimg.cc/xjXSMZYC/temp-Image-Gxql-NP.avif');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: left;
+    "></div>
+    <p>Hola,</p>
+    <p>Has solicitado recuperar tu contraseña. Haz clic en el siguiente botón para restablecerla:</p>
+    <a href="%s" style="display:inline-block;padding:10px 15px;background-color:rgb(210, 103, 51);color:white;text-decoration:none;border-radius:5px;">Restablecer contraseña</a>
+    <p>Si no solicitaste esto, puedes ignorar este mensaje.</p>
+  </body>
+</html>
+`, resetLink)
 
 	message := []byte(subject + mime + htmlBody )
 
