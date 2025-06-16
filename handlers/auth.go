@@ -8,12 +8,14 @@ import (
 	"time"
 
 	"github.com/ElMauro21/UkaUkafb/helpers/auth"
+	"github.com/ElMauro21/UkaUkafb/helpers/view"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 func HandleOpenLogin(c *gin.Context){
-	c.HTML(http.StatusOK,"login.html",gin.H{
+	view.Render(c,http.StatusOK,"login.html",gin.H{
+		"title": "Login",
 	})
 }
 
@@ -136,6 +138,7 @@ func HandleShowResetForm(c *gin.Context){
 
 	c.HTML(http.StatusOK,"reset-password.html",gin.H{
 		"token": token,
+		"title": "UkaUka fb",
 	})
 }
 

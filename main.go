@@ -2,13 +2,13 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/ElMauro21/UkaUkafb/database"
 	"github.com/ElMauro21/UkaUkafb/handlers"
 	"github.com/ElMauro21/UkaUkafb/handlers/admin"
 	"github.com/ElMauro21/UkaUkafb/jobs"
+	"github.com/ElMauro21/UkaUkafb/middleware"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -38,6 +38,7 @@ func main() {
   r := gin.Default()
 
   r.Use(sessions.Sessions("mysession",store))
+  r.Use(middleware.InjectTemplateData())
 
   // Load the templates 
   r.LoadHTMLGlob("templates/*.html")
@@ -51,9 +52,8 @@ func main() {
 
   admin.HandleCreateAdminUser(db)
 
-  r.GET("/", func(c *gin.Context) {
-    c.HTML(http.StatusOK, "index.html" , gin.H{})
-  })
+  // Home routes
+  r.GET("/",handlers.HandleOpenHome)
 
   // Auth routes
   r.GET("/auth/login", handlers.HandleOpenLogin)
