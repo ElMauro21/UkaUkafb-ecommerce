@@ -78,6 +78,102 @@ header {
     transform: translateZ(30px) scale(1);
 }
 
+/* ----- Loggin check ----- */
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.login-status {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    background: rgb(210, 103, 51);
+    border-radius: 50%;
+    padding: 2.5px;
+}
+
+/* ----- Toggle menu ----- */
+
+.sub-menu-wrap {
+    position: absolute;
+    top: 80px;
+    right: 21px;
+    width: 210px;
+    font-size: small;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+}
+
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+}
+
+.sub-menu {
+    background: #333333;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.sub-menu h3 {
+    color: rgb(255, 255, 255);
+    font-size: smaller;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(189, 189, 189);
+    margin: 15px 0 10px;
+}
+
+.sub-menu-link {
+    all: unset;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin: 12px 0;
+    cursor: pointer;
+}
+
+.sub-menu-link p {
+    width: 100%;
+}
+
+.sub-menu-link i {
+    font-size: 10px;
+    color: #000000d8;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-link span {
+    font-size: 15px;
+    transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span {
+    transform: translateX(5px);
+}
+
+.sub-menu-link:hover p {
+    font-weight: 550;
+}
+
+.user-name {
+    display: flex;
+    align-items: center;
+}
+
 /* ----- Forms forms ----- */
 
 .content {
@@ -234,21 +330,4 @@ header {
         width: 90%;
         padding: 0 20px 0 10px;
     }
-}
-
-/* ----- Icon wrapper ----- */
-.icon-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.login-status {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 14px;
-    color: rgb(255, 255, 255);
-    background: rgb(210, 103, 51);
-    border-radius: 50%;
-    padding: 2.5px;
 }

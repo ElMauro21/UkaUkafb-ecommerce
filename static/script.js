@@ -1,6 +1,8 @@
-var loginForm = document.getElementById('login');
-var registerForm = document.getElementById('register');
-var recoverForm = document.getElementById('recover');
+const loginForm = document.getElementById('login');
+const registerForm = document.getElementById('register');
+const recoverForm = document.getElementById('recover');
+const subMenu = document.getElementById('subMenu');
+const toggleButton = document.getElementById('toggleMenuBtn');
 
 function login() {
     loginForm.style.left = '4px';
@@ -39,3 +41,17 @@ function recoverLogin() {
     registerForm.style.zIndex = 0;
     recoverForm.style.zIndex = 1;
 }
+
+toggleButton.addEventListener('click', function (event) {
+    event.stopPropagation();
+    subMenu.classList.toggle('open-menu');
+});
+
+document.addEventListener('click', function (event) {
+    if (
+        !subMenu.contains(event.target) &&
+        !toggleButton.contains(event.target)
+    ) {
+        subMenu.classList.remove('open-menu');
+    }
+});

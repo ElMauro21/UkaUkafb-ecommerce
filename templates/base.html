@@ -4,7 +4,7 @@
   <head>
     <link rel="stylesheet" href="/static/style.css" />
     <meta charset="utf-8" />
-    <title>{{ .title}}</title>
+    <title>{{ .title }}</title>
     <meta name="robots" content="index" />
     <!--Responsive-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -46,17 +46,42 @@
         <button class="header-nav-button">
           <i class="fa-solid fa-cart-shopping"></i>
         </button>
+        {{ if .loggedIn }}
+        <button class="header-nav-button" id="toggleMenuBtn">
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-check login-status"></i>
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </button>
+        {{ else }}
         <button
           class="header-nav-button"
           onclick="window.location.href='/auth/login'"
         >
           <div class="icon-wrapper">
             <i class="fa-solid fa-user"></i>
-            {{ if .loggedIn }}
-            <i class="fa-solid fa-check login-status"></i>
-            {{ end }}
           </div>
         </button>
+        {{ end }}
+        <div class="sub-menu-wrap" id="subMenu">
+          <div class="sub-menu">
+            <div class="user-name"><h3>{{ .user}}</h3></div>
+            <hr />
+
+            <a href="#" class="sub-menu-link">
+              <i class="fa-solid fa-address-card"></i>
+              <p>Editar perfil</p>
+              <span>></span>
+            </a>
+            <form action="/auth/logout" method="post">
+              <button type="submit" class="sub-menu-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Cerrar sesión</p>
+                <span>></span>
+              </button>
+            </form>
+          </div>
+        </div>
         <button class="header-nav-button">
           <i class="fa-solid fa-bars"></i>
         </button>

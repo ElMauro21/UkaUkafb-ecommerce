@@ -57,7 +57,7 @@ func main() {
 
   // Auth routes
   r.GET("/auth/login", handlers.HandleOpenLogin)
-  r.GET("/auth/logout",handlers.HandleLogout)
+  r.POST("/auth/logout",handlers.HandleLogout)
   r.POST("/auth/login",func(c *gin.Context){
     handlers.HandleLogin(c,db)
   })
