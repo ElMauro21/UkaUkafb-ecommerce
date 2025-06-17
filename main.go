@@ -79,6 +79,9 @@ func main() {
   r.POST("/user/update", func(c *gin.Context) {
 	  handlers.HandleUpdateProfile(c, db)
   })
+  r.POST("/user/password", func(c *gin.Context) {
+	  handlers.HandleChangePassword(c, db)
+  })
 
 
   r.Run() 

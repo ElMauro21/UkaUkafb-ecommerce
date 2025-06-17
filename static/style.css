@@ -247,7 +247,7 @@ header {
 }
 
 #passwords .input-field {
-    width: 80%;
+    width: 90%;
 }
 
 #profile .submit {
@@ -255,14 +255,12 @@ header {
 }
 
 .profile-container {
-    position: absolute;
     left: 4px;
     transition: all 0.5s ease-in-out;
     z-index: 2;
 }
 
 .passwords-container {
-    position: absolute;
     right: -520px;
     transition: all 0.5s ease-in-out;
     z-index: 1;

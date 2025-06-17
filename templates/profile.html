@@ -123,29 +123,38 @@
       </div>
       <form action="/user/password" method="post">
         <!--Passwords-->
-        <div class="two-column-grid">
-          <div class="input-box">
-            <input
-              name="reg-password1"
-              type="password"
-              minlength="8"
-              class="input-field"
-              placeholder="Contraseña (8 o más caracteres)"
-              required
-            />
-            <i class="fa-solid fa-lock"></i>
-          </div>
-          <div class="input-box">
-            <input
-              name="reg-password2"
-              type="password"
-              minlength="8"
-              class="input-field"
-              placeholder="Repite la contraseña"
-              required
-            />
-            <i class="fa-solid fa-lock"></i>
-          </div>
+        <!-- Current password -->
+        <div class="input-box">
+          <input
+            name="current-password"
+            type="password"
+            class="input-field"
+            placeholder="Contraseña actual"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="input-box">
+          <input
+            name="reg-password1"
+            type="password"
+            minlength="8"
+            class="input-field"
+            placeholder="Contraseña (8 o más caracteres)"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="input-box">
+          <input
+            name="reg-password2"
+            type="password"
+            minlength="8"
+            class="input-field"
+            placeholder="Repite la contraseña"
+            required
+          />
+          <i class="fa-solid fa-lock"></i>
         </div>
         <div class="input-box">
           <input
