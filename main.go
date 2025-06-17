@@ -72,5 +72,8 @@ func main() {
 	  handlers.HandleResetPassword(c, db)
   })
 
+  // User routes
+  r.GET("/user/profile", handlers.HandleOpenProfile)
+
   r.Run() 
 }

@@ -174,7 +174,7 @@ header {
     align-items: center;
 }
 
-/* ----- Forms forms ----- */
+/* ----- Forms ----- */
 
 .content {
     flex: 1;
@@ -199,7 +199,9 @@ header {
 .register-container,
 .login-container,
 .recover-container,
-.reset-pass {
+.reset-pass,
+.profile-container,
+.passwords-container {
     position: absolute;
     width: 500px;
     display: flex;
@@ -225,6 +227,32 @@ header {
     left: 4px;
     top: 0;
 }
+
+/* profile form */
+
+.two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+    top: 0;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+#profile .input-field {
+    width: 80%;
+}
+
+#profile .submit {
+    margin-top: 10px;
+}
+
+.passwords-container {
+    padding-top: 470px;
+}
+/* ------------- */
 
 .top span {
     color: white;
@@ -326,7 +354,9 @@ header {
     .register-container,
     .login-container,
     .recover-container,
-    .reset-pass {
+    .reset-pass,
+    .profile-containe,
+    .passwords-container {
         width: 90%;
         padding: 0 20px 0 10px;
     }
