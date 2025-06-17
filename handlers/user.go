@@ -63,7 +63,41 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
 	neighborhood := c.PostForm("neighborhood")
 	address := c.PostForm("address")
 
-	_, err := db.Exec(`
+	var current struct {
+		Names       string
+		Surnames    string
+		IDNumber    string
+		Phone       string
+		State       string
+		City        string
+		Neighborhood string
+		Address     string
+	}
+
+	err := db.QueryRow(`
+        SELECT names, surnames, id_number, phone, state, city, neighborhood, address
+        FROM users WHERE email = ?`, email).Scan(
+		&current.Names, &current.Surnames, &current.IDNumber, &current.Phone,
+		&current.State, &current.City, &current.Neighborhood, &current.Address)
+
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Error retrieving current profile.")
+		return
+	}
+
+	if name == current.Names &&
+		surname == current.Surnames &&
+		idNumber == current.IDNumber &&
+		phone == current.Phone &&
+		state == current.State &&
+		city == current.City &&
+		neighborhood == current.Neighborhood &&
+		address == current.Address {
+		c.Redirect(http.StatusSeeOther, "/user/profile")
+		return
+	}
+
+	_, err = db.Exec(`
         UPDATE users
         SET names = ?, surnames = ?, id_number = ?, phone = ?, state = ?, city = ?, neighborhood = ?, address = ?
         WHERE email = ?
