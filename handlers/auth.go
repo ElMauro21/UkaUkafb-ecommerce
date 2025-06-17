@@ -8,14 +8,20 @@ import (
 	"time"
 
 	"github.com/ElMauro21/UkaUkafb/helpers/auth"
+	"github.com/ElMauro21/UkaUkafb/helpers/flash"
 	"github.com/ElMauro21/UkaUkafb/helpers/view"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 func HandleOpenLogin(c *gin.Context){
+	
+	msg,msgType := flash.GetMessage(c)
+
 	view.Render(c,http.StatusOK,"login.html",gin.H{
 		"title": "Login",
+		"Message": msg,
+		"MessageType": msgType,
 	})
 }
 
@@ -28,13 +34,13 @@ func HandleLogin(c *gin.Context, db *sql.DB){
 
 	err := db.QueryRow("SELECT password_hash, is_admin FROM users WHERE email = ?", email).Scan(&storedHash, &isAdmin)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Wrong user or password.")
+		c.String(http.StatusBadRequest, "Wrong user or password.") // HTMX
 		return
 	}
 
 	err = auth.ComparePasswords(storedHash,password)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Wrong user or password.")
+		c.String(http.StatusInternalServerError, "Wrong user or password.") // HTMX
 		return
 	}
 
@@ -67,7 +73,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 	pass2 := c.PostForm("reg-password2")
 
 	if pass1 != pass2{
-		c.String(http.StatusBadRequest, "Passwords do not match.")
+		c.String(http.StatusBadRequest, "Passwords do not match.") // HTMX
 		return
 	}
 
@@ -86,6 +92,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 		return
 	}
 	
+	flash.SetMessage(c,"Usuario creado correctamente","success")
 	c.Redirect(http.StatusSeeOther,"/auth/login")
 }
 
@@ -100,7 +107,8 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 	}
 	
 	if count == 0{
-		c.String(http.StatusOK, "If this email exists, a recovery email has been sent.")
+		flash.SetMessage(c,"Si este correo existe, ya ha sido enviado un correo con las instrucciones","success")
+		c.Redirect(http.StatusSeeOther, "/auth/login")
 		return 
 	}
 
@@ -130,7 +138,8 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 		}
 	}(c.Copy())
 
-	c.String(http.StatusOK, "If this email exists, a recovery email has been sent.")
+	flash.SetMessage(c,"Si este correo existe, ya ha sido enviado un correo con las instrucciones","success")
+	c.Redirect(http.StatusSeeOther, "/auth/login")
 }
 
 func HandleShowResetForm(c *gin.Context){
@@ -166,7 +175,7 @@ func HandleResetPassword(c *gin.Context, db *sql.DB){
 
 	hash, err := auth.HashPassword(newPassword)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to update password.")
+		c.String(http.StatusInternalServerError, "Failed to update password.")
 		return
 	}
 
@@ -178,5 +187,6 @@ func HandleResetPassword(c *gin.Context, db *sql.DB){
 
 	_, _ = db.Exec("DELETE FROM password_resets WHERE token = ?", token)
 
+	flash.SetMessage(c,"La contraseña ha sido actualizada correctamente","success")
 	c.Redirect(http.StatusSeeOther, "/auth/login")
 }

@@ -31,6 +31,9 @@
       href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap"
       rel="stylesheet"
     />
+    <!--SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/alerts.js" defer></script>
     <script src="/static/script.js" defer></script>
   </head>
   <body>
@@ -87,6 +90,12 @@
         </button>
       </nav>
     </header>
+    <!--Alerts-->
+    <div
+      id="flash"
+      data-message="{{.Message}}"
+      data-type="{{.MessageType}}"
+    ></div>
     {{ block "content" . }}{{ end }} {{end}} {{define "footer"}}
     <!-- ===== Footer ===== -->
     <footer>This is the footer</footer>
