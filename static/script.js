@@ -7,57 +7,35 @@ const changeForm = document.getElementById('passwords');
 const profileForm = document.getElementById('profile');
 
 function change() {
-    changeForm.style.right = '4px';
-    profileForm.style.left = '-520px';
-
-    changeForm.style.zIndex = 2;
-    profileForm.style.zIndex = 1;
+    profileForm.style.display = 'none';
+    changeForm.style.display = 'block';
 }
 
 function profile() {
-    changeForm.style.right = '-520px';
-    profileForm.style.left = '4px';
-
-    changeForm.style.zIndex = 1;
-    profileForm.style.zIndex = 2;
+    profileForm.style.display = 'block';
+    changeForm.style.display = 'none';
 }
 
 function login() {
-    loginForm.style.left = '4px';
-    registerForm.style.right = '-520px';
-    recoverForm.style.top = '-520px';
-
-    loginForm.style.zIndex = 2;
-    registerForm.style.zIndex = 1;
-    recoverForm.style.zIndex = 0;
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+    recoverForm.style.display = 'none';
 }
 
 function register() {
-    loginForm.style.left = '-520px';
-    registerForm.style.right = '4px';
-    recoverForm.style.top = '-520px';
-
-    loginForm.style.zIndex = 1;
-    registerForm.style.zIndex = 2;
-    recoverForm.style.zIndex = 0;
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'block';
+    recoverForm.style.display = 'none';
 }
 
 function recover() {
-    loginForm.style.top = '-520px';
-    recoverForm.style.top = '4px';
-
-    loginForm.style.zIndex = 1;
-    registerForm.style.zIndex = 0;
-    recoverForm.style.zIndex = 2;
+    loginForm.style.display = 'none';
+    recoverForm.style.display = 'block';
 }
 
 function recoverLogin() {
-    loginForm.style.top = '4px';
-    recoverForm.style.top = '-520px';
-
-    loginForm.style.zIndex = 2;
-    registerForm.style.zIndex = 0;
-    recoverForm.style.zIndex = 1;
+    loginForm.style.display = 'block';
+    recoverForm.style.display = 'none';
 }
 
 toggleButton.addEventListener('click', function (event) {

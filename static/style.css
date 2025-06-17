@@ -212,16 +212,17 @@ header {
     bottom: 0;
     margin: auto 0;
 }
+
 .register-container {
-    right: -520px;
+    display: none;
 }
 
 .login-container {
-    left: 4px;
+    display: block;
 }
 
 .recover-container {
-    top: -520px;
+    display: none;
 }
 
 .reset-pass {
@@ -255,15 +256,11 @@ header {
 }
 
 .profile-container {
-    left: 4px;
-    transition: all 0.5s ease-in-out;
-    z-index: 2;
+    display: block;
 }
 
 .passwords-container {
-    right: -520px;
-    transition: all 0.5s ease-in-out;
-    z-index: 1;
+    display: none;
 }
 /* ------------- */
 
@@ -331,6 +328,15 @@ header {
 
 ::-webkit-input-placeholder {
     color: white;
+}
+
+.form-box {
+    position: visible;
+}
+
+.input-box input {
+    position: relative;
+    z-index: 1;
 }
 
 .input-box i {

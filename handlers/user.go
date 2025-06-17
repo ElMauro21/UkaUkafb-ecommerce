@@ -128,12 +128,6 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 		return
 	}
 
-	if len(newPass1) < 8 {
-		c.String(http.StatusBadRequest, "La nueva contraseña debe tener al menos 8 caracteres.")
-		return
-	}
-
-	// Get current password hash from DB
 	var storedHash string
 	err := db.QueryRow("SELECT password_hash FROM users WHERE email = ?", email).Scan(&storedHash)
 	if err != nil {
@@ -141,13 +135,11 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 		return
 	}
 
-	// Check current password is correct
 	if err := auth.ComparePasswords(storedHash, currentPass); err != nil {
 		c.String(http.StatusUnauthorized, "La contraseña actual es incorrecta.")
 		return
 	}
 
-	// Hash new password
 	newHash, err := auth.HashPassword(newPass1)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "No se pudo actualizar la contraseña.")
