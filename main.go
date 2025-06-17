@@ -73,7 +73,9 @@ func main() {
   })
 
   // User routes
-  r.GET("/user/profile", handlers.HandleOpenProfile)
+  r.GET("/user/profile", func (c *gin.Context){
+    handlers.HandleOpenProfile(c,db)    
+  })
 
   r.Run() 
 }

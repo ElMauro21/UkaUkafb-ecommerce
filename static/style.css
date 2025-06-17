@@ -172,6 +172,7 @@ header {
 .user-name {
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 /* ----- Forms ----- */
@@ -245,12 +246,26 @@ header {
     width: 80%;
 }
 
+#passwords .input-field {
+    width: 80%;
+}
+
 #profile .submit {
     margin-top: 10px;
 }
 
+.profile-container {
+    position: absolute;
+    left: 4px;
+    transition: all 0.5s ease-in-out;
+    z-index: 2;
+}
+
 .passwords-container {
-    padding-top: 470px;
+    position: absolute;
+    right: -520px;
+    transition: all 0.5s ease-in-out;
+    z-index: 1;
 }
 /* ------------- */
 
