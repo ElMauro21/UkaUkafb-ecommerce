@@ -76,6 +76,10 @@ func main() {
   r.GET("/user/profile", func (c *gin.Context){
     handlers.HandleOpenProfile(c,db)    
   })
+  r.POST("/user/update", func(c *gin.Context) {
+	  handlers.HandleUpdateProfile(c, db)
+  })
+
 
   r.Run() 
 }
