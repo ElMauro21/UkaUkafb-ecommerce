@@ -10,7 +10,7 @@
         >
         <h2 class="form-title">Información personal</h2>
       </div>
-      <form action="/user/update" method="post">
+      <form hx-post="/user/update" hx-target="#flash" hx-swap="outerHTML">
         <div class="two-column-grid">
           <!--Name-->
           <div class="input-box">

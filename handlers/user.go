@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/ElMauro21/UkaUkafb/helpers/auth"
+	"github.com/ElMauro21/UkaUkafb/helpers/flash"
 	"github.com/ElMauro21/UkaUkafb/helpers/view"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -39,10 +40,13 @@ func HandleOpenProfile(c *gin.Context, db *sql.DB){
         c.String(http.StatusInternalServerError, "Error loading profile.")
         return
     }
-
+	
+	msg,msgType := flash.GetMessage(c)
     view.Render(c, http.StatusOK, "profile.html", gin.H{
         "title": "Perfil",
         "User":  user,
+		"Message": msg,
+		"MessageType": msgType,
     })
 }
 
@@ -85,7 +89,7 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
 		return
 	}
 
-	if name == current.Names &&
+	if 	name == current.Names &&
 		surname == current.Surnames &&
 		idNumber == current.IDNumber &&
 		phone == current.Phone &&
@@ -93,7 +97,7 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
 		city == current.City &&
 		neighborhood == current.Neighborhood &&
 		address == current.Address {
-		c.Redirect(http.StatusSeeOther, "/user/profile")
+		view.RenderFlash(c,http.StatusOK,"No se han efectuado cambios.","info")
 		return
 	}
 
@@ -108,7 +112,7 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
 		return
 	}
 
-	c.Redirect(http.StatusSeeOther, "/user/profile")
+	view.RenderFlash(c,http.StatusOK,"Perfil actualizado correctamente.","success")
 }
 
 func HandleChangePassword(c *gin.Context, db *sql.DB) {
