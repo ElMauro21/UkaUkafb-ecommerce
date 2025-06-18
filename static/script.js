@@ -38,16 +38,18 @@ function recoverLogin() {
     recoverForm.style.display = 'none';
 }
 
-toggleButton.addEventListener('click', function (event) {
-    event.stopPropagation();
-    subMenu.classList.toggle('open-menu');
-});
+if (toggleButton && subMenu) {
+    toggleButton.addEventListener('click', function (event) {
+        event.stopPropagation();
+        subMenu.classList.toggle('open-menu');
+    });
 
-document.addEventListener('click', function (event) {
-    if (
-        !subMenu.contains(event.target) &&
-        !toggleButton.contains(event.target)
-    ) {
-        subMenu.classList.remove('open-menu');
-    }
-});
+    document.addEventListener('click', function (event) {
+        if (
+            !subMenu.contains(event.target) &&
+            !toggleButton.contains(event.target)
+        ) {
+            subMenu.classList.remove('open-menu');
+        }
+    });
+}
