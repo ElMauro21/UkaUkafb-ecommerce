@@ -54,8 +54,53 @@ if (toggleButton && subMenu) {
     });
 }
 
+// Dashboard
+
 document.body.addEventListener('htmx:afterSwap', function (evt) {
     if (evt.detail.target.id === 'flash') {
         document.getElementById('admin-products').reset();
     }
 });
+
+function fillProductForm(select) {
+    const option = select.options[select.selectedIndex];
+    const addButton = document.getElementById('add-button');
+
+    if (!option.value) {
+        // No product selected → reset form and show "Añadir"
+        document.getElementById('admin-products').reset();
+        if (addButton) addButton.style.display = 'inline-block';
+
+        const hiddenId = document.querySelector('[name="product-id"]');
+        if (hiddenId) hiddenId.remove();
+
+        return;
+    }
+
+    // Fill form fields
+    document.querySelector('[name="product-name"]').value = option.dataset.name;
+    document.querySelector('[name="product-description"]').value =
+        option.dataset.description;
+    document.querySelector('[name="product-weight"]').value =
+        option.dataset.weight;
+    document.querySelector('[name="product-size"]').value = option.dataset.size;
+    document.querySelector('[name="product-price"]').value =
+        option.dataset.price;
+    document.querySelector('[name="product-quantity"]').value =
+        option.dataset.quantity;
+    document.querySelector('[name="product-image"]').value =
+        option.dataset.image;
+
+    // Set hidden product ID
+    let hiddenInput = document.querySelector('[name="product-id"]');
+    if (!hiddenInput) {
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'product-id';
+        document.getElementById('admin-products').appendChild(hiddenInput);
+    }
+    hiddenInput.value = option.value;
+
+    // Hide "Añadir" button when editing
+    if (addButton) addButton.style.display = 'none';
+}

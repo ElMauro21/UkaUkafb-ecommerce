@@ -1,6 +1,7 @@
 {{ template "base" .}}
 <div class="dashboard-container">
   <form class="admin-products" id="admin-products">
+    <input type="hidden" name="product-id" />
     <div class="item dashboard-products-title">
       <div class="top">
         <h2 class="form-title">Productos</h2>
@@ -38,7 +39,7 @@
           name="product-weight"
           type="number"
           class="input-field-dash"
-          placeholder="Peso"
+          placeholder="Peso (gramos)"
           required
         />
       </div>
@@ -50,7 +51,7 @@
           name="product-size"
           type="number"
           class="input-field-dash"
-          placeholder="Tamaño"
+          placeholder="Tamaño (cm3)"
           required
         />
       </div>
@@ -95,6 +96,7 @@
       <!--Buttton Add-->
       <div>
         <input
+          id="add-button"
           type="submit"
           class="submit submit-dash"
           value="Añadir"
@@ -128,7 +130,24 @@
       </div>
     </div>
     <div class="item dashboard-products-finder">
-      <!--Finder-->
+      <select id="product-selector" onchange="fillProductForm(this)">
+        <option value="">-- Selecciona un producto --</option>
+        {{range .products}}
+        <option
+          value="{{.ID}}"
+          data-name="{{.Name}}"
+          data-description="{{.Description}}"
+          data-weight="{{.Weight}}"
+          data-size="{{.Size}}"
+          data-price="{{.Price}}"
+          data-quantity="{{.Quantity}}"
+          data-image="{{.Image}}"
+        >
+          {{.Name}} | Peso: {{.Weight}} | Tamaño: {{.Size}} | ${{.Price}} |
+          Stock: {{.Quantity}}
+        </option>
+        {{end}}
+      </select>
     </div>
   </form>
   <div class="admin-orders">Hola</div>

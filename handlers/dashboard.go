@@ -4,14 +4,39 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/ElMauro21/UkaUkafb/helpers/flash"
 	"github.com/ElMauro21/UkaUkafb/helpers/view"
 	"github.com/gin-gonic/gin"
 )
 
-func HandleOpenDashboard(c *gin.Context){
+type Product struct {
+    ID       int
+    Name     string
+	Description string
+    Weight   int
+    Size     int
+    Price    float64
+    Quantity int
+	Image string
+}
 
+func HandleOpenDashboard(c *gin.Context,db *sql.DB){
+
+    rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url FROM products`)
+    var products []Product
+
+    for rows.Next() {
+        var p Product
+        rows.Scan(&p.ID, &p.Name, &p.Description, &p.Weight, &p.Size, &p.Price, &p.Quantity, &p.Image)
+        products = append(products, p)
+    }
+
+	msg,msgType := flash.GetMessage(c)
 	view.Render(c,http.StatusOK,"dashboard.html",gin.H{
 		"title": "Dashboard",
+		"Message": msg,
+		"MessageType": msgType,
+		"products": products,
 	})
 }
 
@@ -33,5 +58,7 @@ func HandleAddProduct(c *gin.Context, db *sql.DB){
 		return
 	}
 
-	view.RenderFlash(c,http.StatusOK,"Producto creado correctamente","success")
+	flash.SetMessage(c,"Producto creado correctamente","success")
+	c.Header("HX-Redirect","/admin/dashboard")
+	c.Status(http.StatusSeeOther)
 }
