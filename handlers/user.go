@@ -128,7 +128,7 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 	newPass2 := c.PostForm("reg-password2")
 
 	if newPass1 != newPass2 {
-		c.String(http.StatusBadRequest, "Las nuevas contraseñas no coinciden.")
+		view.RenderFlash(c,http.StatusOK,"Las nuevas contraseñas deben coincidir","error")
 		return
 	}
 
@@ -140,7 +140,7 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 	}
 
 	if err := auth.ComparePasswords(storedHash, currentPass); err != nil {
-		c.String(http.StatusUnauthorized, "La contraseña actual es incorrecta.")
+		view.RenderFlash(c,http.StatusOK,"La contraseña actual es incorrecta","error")
 		return
 	}
 
@@ -155,6 +155,8 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 		c.String(http.StatusInternalServerError, "Error al guardar la nueva contraseña.")
 		return
 	}
-
-	c.Redirect(http.StatusSeeOther, "/user/profile")
+	
+	flash.SetMessage(c,"Contraseña actualizada correctamente","success")
+	c.Header("HX-Redirect","/user/profile")
+	c.Status(http.StatusSeeOther)
 }

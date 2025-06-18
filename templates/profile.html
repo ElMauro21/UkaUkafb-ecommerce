@@ -113,6 +113,7 @@
         </div>
       </form>
     </div>
+    <!-- ===== Passwords form ===== -->
     <div class="passwords-container" id="passwords">
       <div class="top">
         <span>
@@ -121,7 +122,7 @@
         >
         <h2 class="form-title">Cambia tu contraseña</h2>
       </div>
-      <form action="/user/password" method="post">
+      <form hx-post="/user/password" hx-target="#flash" hx-swap="outerHTML">
         <!--Passwords-->
         <!-- Current password -->
         <div class="input-box">
