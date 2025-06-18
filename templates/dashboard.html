@@ -1,0 +1,133 @@
+{{ template "base" .}}
+<div class="dashboard-container">
+  <form class="admin-products">
+    <div class="item dashboard-products-title">
+      <div class="top">
+        <h2 class="form-title">Productos</h2>
+      </div>
+    </div>
+    <div class="item">
+      <!--Name-->
+      <div>
+        <input
+          name="product-name"
+          type="text"
+          class="input-field-dash"
+          placeholder="Nombre"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Description-->
+      <div>
+        <textarea
+          name="product-description"
+          type="text"
+          class="input-field-dash text-area"
+          placeholder="Descripción"
+          rows="6"
+          required
+        ></textarea>
+      </div>
+    </div>
+    <div class="item">
+      <!--Weight-->
+      <div>
+        <input
+          name="product-weight"
+          type="number"
+          class="input-field-dash"
+          placeholder="Peso"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Size-->
+      <div>
+        <input
+          name="product-size"
+          type="number"
+          class="input-field-dash"
+          placeholder="Tamaño"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Image-->
+      <div>
+        <input
+          name="product-image"
+          type="url"
+          class="input-field-dash"
+          placeholder="Url-imagen"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Price-->
+      <div>
+        <input
+          name="product-price"
+          type="number"
+          class="input-field-dash"
+          placeholder="Precio"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Quantity-->
+      <div>
+        <input
+          name="product-quantity"
+          type="number"
+          class="input-field-dash"
+          placeholder="Cantidad"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Buttton Add-->
+      <div>
+        <input
+          type="submit"
+          class="submit submit-dash"
+          value="Añadir"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Buttton Update -->
+      <div>
+        <input
+          type="submit"
+          class="submit submit-dash"
+          value="Actualizar"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Buttton Delete-->
+      <div>
+        <input
+          type="submit"
+          class="submit submit-dash"
+          value="Eliminar"
+          required
+        />
+      </div>
+    </div>
+    <div class="item dashboard-products-finder">
+      <!--Finder-->
+    </div>
+  </form>
+  <div class="admin-orders">Hola</div>
+</div>
+{{ template "footer" .}}

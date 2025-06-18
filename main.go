@@ -83,6 +83,10 @@ func main() {
 	  handlers.HandleChangePassword(c, db)
   })
 
+  // Dashboard
+  r.GET("/admin/dashboard", func (c *gin.Context){
+    handlers.HandleOpenDashboard(c)
+  }) 
 
   r.Run() 
 }
