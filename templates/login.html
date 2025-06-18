@@ -89,7 +89,7 @@
         <span> Tienes una cuenta? <a href="#" onclick="login()">Login</a></span>
         <h2 class="form-title">Regístrate!</h2>
       </div>
-      <form action="/auth/register" method="post">
+      <form hx-post="/auth/register" hx-target="#flash" hx-swap="outerHTML">
         <!--Name-->
         <div class="input-box">
           <input

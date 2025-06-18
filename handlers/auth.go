@@ -74,7 +74,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 	pass2 := c.PostForm("reg-password2")
 
 	if pass1 != pass2{
-		c.String(http.StatusBadRequest, "Passwords do not match.") // HTMX
+		view.RenderFlash(c,http.StatusOK,"Las contraseñas deben coincidir","error")
 		return
 	}
 
@@ -94,7 +94,8 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 	}
 	
 	flash.SetMessage(c,"Usuario creado correctamente","success")
-	c.Redirect(http.StatusSeeOther,"/auth/login")
+	c.Header("HX-Redirect","/auth/login")
+	c.Status(http.StatusSeeOther)
 }
 
 func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
