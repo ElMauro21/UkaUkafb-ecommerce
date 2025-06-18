@@ -39,12 +39,11 @@ mustExec(db,`
 CREATE TABLE IF NOT EXISTS products (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name TEXT NOT NULL, 
-description TEXT,
-color TEXT,
+description TEXT NOT NULL,
+weight INTEGER NOT NULL,
+size INTEGER NOT NULL,
 price FLOAT NOT NULL,
 quantity INTEGER NOT NULL,
-is_parent BOOLEAN DEFAULT 0,
-id_parent INTEGER, 
 image_url TEXT
 );`)
 mustExec(db,`

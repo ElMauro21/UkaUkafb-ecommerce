@@ -53,3 +53,9 @@ if (toggleButton && subMenu) {
         }
     });
 }
+
+document.body.addEventListener('htmx:afterSwap', function (evt) {
+    if (evt.detail.target.id === 'flash') {
+        document.getElementById('admin-products').reset();
+    }
+});

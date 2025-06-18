@@ -87,6 +87,9 @@ func main() {
   r.GET("/admin/dashboard", func (c *gin.Context){
     handlers.HandleOpenDashboard(c)
   }) 
+  r.POST("/admin/products/add", func (c *gin.Context){
+    handlers.HandleAddProduct(c,db)
+  })
 
   r.Run() 
 }

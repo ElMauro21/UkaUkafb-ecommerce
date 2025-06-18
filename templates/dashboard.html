@@ -1,6 +1,6 @@
 {{ template "base" .}}
 <div class="dashboard-container">
-  <form class="admin-products">
+  <form class="admin-products" id="admin-products">
     <div class="item dashboard-products-title">
       <div class="top">
         <h2 class="form-title">Productos</h2>
@@ -99,6 +99,9 @@
           class="submit submit-dash"
           value="Añadir"
           required
+          hx-post="/admin/products/add"
+          hx-target="#flash"
+          hx-swap="outerHTML"
         />
       </div>
     </div>
