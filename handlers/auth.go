@@ -34,13 +34,13 @@ func HandleLogin(c *gin.Context, db *sql.DB){
 
 	err := db.QueryRow("SELECT password_hash, is_admin FROM users WHERE email = ?", email).Scan(&storedHash, &isAdmin)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Wrong user or password.") // HTMX
+		view.RenderFlash(c,http.StatusOK,"Contraseña o usuario incorrectos","error")
 		return
 	}
 
 	err = auth.ComparePasswords(storedHash,password)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Wrong user or password.") // HTMX
+		view.RenderFlash(c,http.StatusOK,"Contraseña o usuario incorrectos","error")
 		return
 	}
 
@@ -49,7 +49,8 @@ func HandleLogin(c *gin.Context, db *sql.DB){
 	session.Set("admin", isAdmin == 1)
 	session.Set("loggedIn", true)
 	session.Save()
-	c.Redirect(http.StatusSeeOther,"/")
+	c.Header("HX-Redirect","/")
+	c.Status(http.StatusOK)
 }
 
 func HandleLogout(c *gin.Context){

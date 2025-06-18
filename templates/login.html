@@ -42,7 +42,7 @@
         >
         <h2 class="form-title">Inicia sesión!</h2>
       </div>
-      <form action="/auth/login" method="post">
+      <form hx-post="/auth/login" hx-target="#flash" hx-swap="outerHTML">
         <!--Mail-->
         <div class="input-box">
           <input
