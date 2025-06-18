@@ -158,7 +158,7 @@ func HandleResetPassword(c *gin.Context, db *sql.DB){
 	newPassword := c.PostForm("recover-pass")
 
 	if token == "" || newPassword == ""{
-		c.String(http.StatusBadRequest, "Token and password are required.")
+		view.RenderFlash(c,http.StatusOK,"Se requiere token y y contraseña","error")
 		return
 	}
 
@@ -166,12 +166,12 @@ func HandleResetPassword(c *gin.Context, db *sql.DB){
 	var expiresAt time.Time
 	err := db.QueryRow("SELECT email, expires_at FROM password_resets WHERE token = ?", token).Scan(&email, &expiresAt)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Invalid or expired token.")
+		view.RenderFlash(c,http.StatusOK,"El token ha expirado!","error")
 		return
 	}
 
 	if time.Now().After(expiresAt) {
-		c.String(http.StatusBadRequest, "Token has expired.")
+		view.RenderFlash(c,http.StatusOK,"El token ha expirado!","error")
 		return
 	}
 
