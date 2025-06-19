@@ -1,1 +1,29 @@
-{{ template "base" .}} This is the shop {{ template "footer" .}}
+{{ template "base" .}}
+<div class="container">
+  <div class="product-grid">
+    <!-- Product Card -->
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img
+          src="https://i.postimg.cc/Jzfzx8CM/temp-Imagex-CToip.avif"
+          class="main-image"
+          alt="Product"
+        />
+        <img
+          src="https://i.postimg.cc/Jhj4dFRJ/temp-Image-ELAh-Hx.avif"
+          class="hover-image"
+          alt="Product Hover"
+        />
+      </div>
+      <div class="product-info">
+        <h3>Product Name</h3>
+        <p>$29.99</p>
+      </div>
+      <div class="details-button">
+        <button>View Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ template "footer" .}}
