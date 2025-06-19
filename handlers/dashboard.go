@@ -49,6 +49,11 @@ func HandleAddProduct(c *gin.Context, db *sql.DB){
 	quantity := c.PostForm("product-quantity")
 	image := c.PostForm("product-image")
 
+	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" {
+		view.RenderFlash(c,http.StatusOK,"Todos los campos son obligatorios","info")
+		return
+	}
+
 	_, err := db.Exec(`INSERT INTO products 
 	(name, description, weight, size, price, quantity, image_url) 
 	VALUES (?, ?, ?, ?, ?, ?, ?)`, 
@@ -66,6 +71,12 @@ func HandleAddProduct(c *gin.Context, db *sql.DB){
 func HandleDeleteProduct(c *gin.Context,db *sql.DB){
 
 	productId := c.PostForm("product-id")
+
+	if productId == "" {
+		view.RenderFlash(c,http.StatusOK,"No hay producto para eliminar","info")
+		return
+	}
+
 	_, err := db.Exec(`DELETE FROM products WHERE id = ?`,productId)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Can not delete product.")
