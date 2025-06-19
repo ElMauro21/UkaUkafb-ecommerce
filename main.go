@@ -90,6 +90,9 @@ func main() {
   r.POST("/admin/products/add", func (c *gin.Context){
     handlers.HandleAddProduct(c,db)
   })
+  r.POST("/admin/products/delete", func (c *gin.Context){
+    handlers.HandleDeleteProduct(c,db)
+  })
 
   r.Run() 
 }

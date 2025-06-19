@@ -62,3 +62,16 @@ func HandleAddProduct(c *gin.Context, db *sql.DB){
 	c.Header("HX-Redirect","/admin/dashboard")
 	c.Status(http.StatusSeeOther)
 }
+
+func HandleDeleteProduct(c *gin.Context,db *sql.DB){
+
+	productId := c.PostForm("product-id")
+	_, err := db.Exec(`DELETE FROM products WHERE id = ?`,productId)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Can not delete product.")
+	}
+
+	flash.SetMessage(c,"Producto eliminado correctamente","success")
+	c.Header("HX-Redirect","/admin/dashboard")
+	c.Status(http.StatusSeeOther)
+}

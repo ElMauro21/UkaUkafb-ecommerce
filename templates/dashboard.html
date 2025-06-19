@@ -126,6 +126,9 @@
           class="submit submit-dash"
           value="Eliminar"
           required
+          hx-post="/admin/products/delete"
+          hx-target="#flash"
+          hx-swap="outerHTML"
         />
       </div>
     </div>
