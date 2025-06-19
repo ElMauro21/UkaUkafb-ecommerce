@@ -59,7 +59,6 @@ document.body.addEventListener('htmx:afterSwap', function (evt) {
         const flash = document.getElementById('flash');
         const type = flash?.getAttribute('data-type');
 
-        // Only reset form if flash message indicates success
         if (type === 'success') {
             const form = document.getElementById('admin-products');
             form.reset();
@@ -100,7 +99,8 @@ function fillProductForm(select) {
         option.dataset.quantity;
     document.querySelector('[name="product-image"]').value =
         option.dataset.image;
-
+    document.querySelector('[name="product-image-two"]').value =
+        option.dataset.image2;
     let hiddenInput = document.querySelector('[name="product-id"]');
     if (!hiddenInput) {
         hiddenInput = document.createElement('input');

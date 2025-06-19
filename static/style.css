@@ -400,7 +400,7 @@ input[type='number']::-webkit-inner-spin-button {
 .admin-products {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(7, 60px);
+    grid-template-rows: repeat(8, 60px);
     grid-gap: 0 0.5em;
     width: 50%;
     height: 100%;
@@ -446,7 +446,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .dashboard-products-finder {
-    grid-area: 7 / 1 / 8 / 3;
+    grid-area: 8 / 1 / 8 / 3;
 }
 
 .input-field-dash {

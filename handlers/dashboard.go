@@ -18,16 +18,17 @@ type Product struct {
     Price    float64
     Quantity int
 	Image string
+	Image2 string
 }
 
 func HandleOpenDashboard(c *gin.Context,db *sql.DB){
 
-    rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url FROM products`)
+    rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url, image_url_2 FROM products`)
     var products []Product
 
     for rows.Next() {
         var p Product
-        rows.Scan(&p.ID, &p.Name, &p.Description, &p.Weight, &p.Size, &p.Price, &p.Quantity, &p.Image)
+        rows.Scan(&p.ID, &p.Name, &p.Description, &p.Weight, &p.Size, &p.Price, &p.Quantity, &p.Image, &p.Image2)
         products = append(products, p)
     }
 
@@ -49,16 +50,17 @@ func HandleAddProduct(c *gin.Context, db *sql.DB){
 	price := c.PostForm("product-price")
 	quantity := c.PostForm("product-quantity")
 	image := c.PostForm("product-image")
+	image2 := c.PostForm("product-image-two")
 
-	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" {
+	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" || image2 == ""{
 		view.RenderFlash(c,http.StatusOK,"Todos los campos son obligatorios","info")
 		return
 	}
 
 	_, err := db.Exec(`INSERT INTO products 
-	(name, description, weight, size, price, quantity, image_url) 
-	VALUES (?, ?, ?, ?, ?, ?, ?)`, 
-	name, description, weight, size, price, quantity, image)
+	(name, description, weight, size, price, quantity, image_url, image_url_2) 
+	VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
+	name, description, weight, size, price, quantity, image, image2)
 	if err != nil{
 		c.String(http.StatusInternalServerError, "No se pudo crear el producto.")
 		return
@@ -85,8 +87,9 @@ func HandleDeleteProduct(c *gin.Context,db *sql.DB){
 	price := c.PostForm("product-price")
 	quantity := c.PostForm("product-quantity")
 	image := c.PostForm("product-image")
+	image2 := c.PostForm("product-image-two")
 	
-	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" {
+	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" || image2 == ""{
 		view.RenderFlash(c,http.StatusOK,"Todos los campos son obligatorios","info")
 		return
 	}
@@ -116,16 +119,17 @@ func HandleUpdateProduct(c *gin.Context, db *sql.DB){
 	price := c.PostForm("product-price")
 	quantity := c.PostForm("product-quantity")
 	image := c.PostForm("product-image")
+	image2 := c.PostForm("product-image-two")
 
-	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" {
+	if name == "" || description == "" || weight == "" || size == "" || price == "" || quantity == "" || image == "" || image2 == ""{
 		view.RenderFlash(c,http.StatusOK,"Todos los campos son obligatorios","info")
 		return
 	}
 
 	_, err := db.Exec(`UPDATE products
-	SET name = ?, description = ?, weight = ?, size = ?, price = ?, quantity = ?, image_url = ? 
+	SET name = ?, description = ?, weight = ?, size = ?, price = ?, quantity = ?, image_url = ?, image_url_2 = ? 
 	WHERE id = ?
-	`, name, description, weight, size, price, quantity, image, productId)
+	`, name, description, weight, size, price, quantity, image, image2, productId)
 
 	if err != nil {
 		c.String(http.StatusInternalServerError, "No se pudo actualizar el producto.")

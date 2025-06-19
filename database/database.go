@@ -44,7 +44,8 @@ weight INTEGER NOT NULL,
 size INTEGER NOT NULL,
 price FLOAT NOT NULL,
 quantity INTEGER NOT NULL,
-image_url TEXT
+image_url TEXT,
+image_url_2 TEXT
 );`)
 mustExec(db,`
 CREATE TABLE IF NOT EXISTS carts (

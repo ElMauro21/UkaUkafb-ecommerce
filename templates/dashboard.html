@@ -63,7 +63,19 @@
           name="product-image"
           type="url"
           class="input-field-dash"
-          placeholder="Url-imagen"
+          placeholder="Url imagen"
+          required
+        />
+      </div>
+    </div>
+    <div class="item">
+      <!--Image-->
+      <div>
+        <input
+          name="product-image-two"
+          type="url"
+          class="input-field-dash"
+          placeholder="Url imagen 2"
           required
         />
       </div>
@@ -93,15 +105,14 @@
       </div>
     </div>
     <div class="item">
-      <!--Buttton Add-->
+      <!--Buttton Delete-->
       <div>
         <input
-          id="add-button"
           type="submit"
           class="submit submit-dash"
-          value="Añadir"
+          value="Eliminar"
           required
-          hx-post="/admin/products/add"
+          hx-post="/admin/products/delete"
           hx-target="#flash"
           hx-swap="outerHTML"
         />
@@ -122,14 +133,15 @@
       </div>
     </div>
     <div class="item">
-      <!--Buttton Delete-->
+      <!--Buttton Add-->
       <div>
         <input
+          id="add-button"
           type="submit"
           class="submit submit-dash"
-          value="Eliminar"
+          value="Añadir"
           required
-          hx-post="/admin/products/delete"
+          hx-post="/admin/products/add"
           hx-target="#flash"
           hx-swap="outerHTML"
         />
@@ -148,6 +160,7 @@
           data-price="{{.Price}}"
           data-quantity="{{.Quantity}}"
           data-image="{{.Image}}"
+          data-image2="{{.Image2}}"
         >
           {{.Name}} | Peso: {{.Weight}} | Tamaño: {{.Size}} | ${{.Price}} |
           Stock: {{.Quantity}}
