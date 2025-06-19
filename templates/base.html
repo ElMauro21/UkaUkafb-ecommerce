@@ -49,6 +49,17 @@
         <h1 class="header-title">UkaUka<sup>fb</sup></h1>
       </div>
       <nav class="header-nav">
+        {{ if and .loggedIn .isAdmin }}
+        <button
+          class="header-nav-button"
+          onclick="window.location.href='/admin/dashboard'"
+        >
+          <i class="fa-solid fa-hammer"></i>
+        </button>
+        {{ end }}
+        <button class="header-nav-button">
+          <i class="fa-solid fa-shop"></i>
+        </button>
         <button class="header-nav-button">
           <i class="fa-solid fa-cart-shopping"></i>
         </button>

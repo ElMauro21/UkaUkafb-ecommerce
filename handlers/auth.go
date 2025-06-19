@@ -73,6 +73,13 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 	pass1 := c.PostForm("reg-password1")
 	pass2 := c.PostForm("reg-password2")
 
+	var count int
+	db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", mail).Scan(&count)
+	if count > 0{
+		view.RenderFlash(c,http.StatusOK,"No se ha podido crear usuario","error")
+		return
+	}
+
 	if pass1 != pass2{
 		view.RenderFlash(c,http.StatusOK,"Las contraseñas deben coincidir","error")
 		return
