@@ -6,6 +6,7 @@ import (
 
 	"github.com/ElMauro21/UkaUkafb/helpers/flash"
 	"github.com/ElMauro21/UkaUkafb/helpers/view"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +23,15 @@ type Product struct {
 }
 
 func HandleOpenDashboard(c *gin.Context,db *sql.DB){
+
+	session := sessions.Default(c)
+	isAdmin,ok := session.Get("isAdmin").(bool)
+
+	if !ok || !isAdmin {
+		flash.SetMessage(c,"Necesitas permisos de administrador","error")
+		c.Redirect(http.StatusSeeOther,"/auth/login")
+    	return
+	}
 
     rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url, image_url_2 FROM products`)
     var products []Product

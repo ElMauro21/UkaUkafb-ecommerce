@@ -46,7 +46,7 @@ func HandleLogin(c *gin.Context, db *sql.DB){
 
 	session := sessions.Default(c)
 	session.Set("user", email)
-	session.Set("admin", isAdmin == 1)
+	session.Set("isAdmin", isAdmin == 1)
 	session.Set("loggedIn", true)
 	session.Save()
 	c.Header("HX-Redirect","/")

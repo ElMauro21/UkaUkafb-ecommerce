@@ -11,7 +11,7 @@ func InjectTemplateData() gin.HandlerFunc{
 
 		user := session.Get("user")
 		loggedIn := session.Get("loggedIn")
-		isAdmin := session.Get("admin")
+		isAdmin := session.Get("isAdmin")
 
 		templateData := gin.H{
 			"user": user,
