@@ -97,5 +97,10 @@ func main() {
     handlers.HandleUpdateProduct(c,db)
   })
 
+  // Shop
+  r.GET("/shop", func (c *gin.Context){
+    handlers.HandleOpenShop(c)
+  })
+
   r.Run() 
 }
