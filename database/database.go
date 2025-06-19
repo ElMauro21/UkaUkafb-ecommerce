@@ -11,7 +11,7 @@ func InitDB(path string) *sql.DB{
 // Open (or create) the file uka.db
 db,err := sql.Open("sqlite3","./uka.db")
 if err != nil{
-	log.Fatalf("failed to open database: %v", err)
+	log.Fatalf("Error al abrir la base de datos: %v", err)
 }
 runMigration(db)
 return db
@@ -73,6 +73,6 @@ expires_at DATETIME NOT NULL
 // helper: panic if migration fails
 func mustExec(db *sql.DB, stmt string){
 	if _,err := db.Exec(stmt); err != nil{
-		log.Fatalf("migration failed: %v\n-- statement:\n%s",err,stmt)
+		log.Fatalf("Error al crear tablas: %v\n-- statement:\n%s",err,stmt)
 	}
 }

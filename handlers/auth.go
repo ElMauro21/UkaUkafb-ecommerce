@@ -87,7 +87,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 
 	hashedPassword, err := auth.HashPassword(pass1)
 	if err != nil{
-		c.String(http.StatusInternalServerError, "Can not create user.")
+		c.String(http.StatusInternalServerError, "No se ha podido crear usuario.")
 		return
 	}
 
@@ -96,7 +96,7 @@ func HandleRegister(c *gin.Context, db *sql.DB){
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
 	name, surname, idNumber, phone, mail, state, city, neigb, addr, hashedPassword)
 	if err != nil{
-		c.String(http.StatusInternalServerError, "Can not create user.")
+		c.String(http.StatusInternalServerError, "No se ha podido crear usuario.")
 		return
 	}
 	
@@ -111,7 +111,7 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
 	if err != nil{
-		c.String(http.StatusInternalServerError, "Database error.")
+		c.String(http.StatusInternalServerError, "Error en la base de datos.")
 		return 
 	}
 	
@@ -123,7 +123,7 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 
 	token, err := auth.GenerateRandomToken(32)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Can not create reset token.")
+		c.String(http.StatusInternalServerError, "No se pudo crear token de reseteo.")
 		return
 	}
 
@@ -132,7 +132,7 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 	(email, token, expires_at) VALUES (?, ?, ?)`,
 	 email,token,expiresAt)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Failed to store reset token.")
+		c.String(http.StatusInternalServerError, "No se pudo guardar token de reseteo")
 		return
 	}
 
@@ -143,7 +143,7 @@ func HandleCreateRecoveryLink(c *gin.Context, db *sql.DB){
 
 	go func(cCopy *gin.Context){
 		if err := auth.SendRecoveryEmail(cCopy); err != nil {
-			log.Println("Failed to send recovery email:", err)
+			log.Println("No se pudo enviar correo de recuperación:", err)
 		}
 	}(c.Copy())
 
@@ -184,13 +184,13 @@ func HandleResetPassword(c *gin.Context, db *sql.DB){
 
 	hash, err := auth.HashPassword(newPassword)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Failed to update password.")
+		c.String(http.StatusInternalServerError, "No se pudo actualizar contraseña.")
 		return
 	}
 
 	_, err = db.Exec("UPDATE users SET password_hash = ? WHERE email = ?", hash, email)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Failed to update password.")
+		c.String(http.StatusInternalServerError, "No se pudo actualizar contraseña..")
 		return
 	}
 

@@ -115,6 +115,9 @@
           class="submit submit-dash"
           value="Actualizar"
           required
+          hx-post="/admin/products/update"
+          hx-target="#flash"
+          hx-swap="outerHTML"
         />
       </div>
     </div>

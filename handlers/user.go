@@ -30,14 +30,14 @@ func HandleOpenProfile(c *gin.Context, db *sql.DB){
         Address     string
     }
 
-	    err := db.QueryRow(`
-        SELECT names, surnames, id_number, phone, state, city, neighborhood, address 
-        FROM users WHERE email = ?`, email).
-        Scan(&user.Names, &user.Surnames, &user.IDNumber, &user.Phone,
-            &user.State, &user.City, &user.Neighborhood, &user.Address)
+	err := db.QueryRow(`
+    SELECT names, surnames, id_number, phone, state, city, neighborhood, address 
+    FROM users WHERE email = ?`, email).
+    Scan(&user.Names, &user.Surnames, &user.IDNumber, &user.Phone,
+    &user.State, &user.City, &user.Neighborhood, &user.Address)
 
     if err != nil {
-        c.String(http.StatusInternalServerError, "Error loading profile.")
+        c.String(http.StatusInternalServerError, "Error al cargar perfil.")
         return
     }
 	
@@ -85,7 +85,7 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
 		&current.State, &current.City, &current.Neighborhood, &current.Address)
 
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Error retrieving current profile.")
+		c.String(http.StatusInternalServerError, "Error no se puede verificar el perfil.")
 		return
 	}
 
@@ -108,7 +108,7 @@ func HandleUpdateProfile(c *gin.Context, db *sql.DB) {
     `, name, surname, idNumber, phone, state, city, neighborhood, address, email)
 
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Error updating profile.")
+		c.String(http.StatusInternalServerError, "Error al actualizar perfil.")
 		return
 	}
 

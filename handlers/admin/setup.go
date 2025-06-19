@@ -37,6 +37,6 @@ func HandleCreateAdminUser(db *sql.DB){
 	VALUES (?,?,?,?,?,?,?,?,?,?,1)
 	`,name,surname,idNumber,phone,email,state,city,neigb,addr, hashedPassword)
 	if err != nil {
-		log.Printf("Failed to create admin user: %v", err)
+		log.Printf("Error al crear usuario admin: %v", err)
 	}
 }

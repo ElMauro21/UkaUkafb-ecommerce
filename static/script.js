@@ -54,11 +54,22 @@ if (toggleButton && subMenu) {
     });
 }
 
-// Dashboard
-
 document.body.addEventListener('htmx:afterSwap', function (evt) {
     if (evt.detail.target.id === 'flash') {
-        document.getElementById('admin-products').reset();
+        const flash = document.getElementById('flash');
+        const type = flash?.getAttribute('data-type');
+
+        // Only reset form if flash message indicates success
+        if (type === 'success') {
+            const form = document.getElementById('admin-products');
+            form.reset();
+
+            const addButton = document.getElementById('add-button');
+            if (addButton) addButton.style.display = 'inline-block';
+
+            const hiddenId = form.querySelector('[name="product-id"]');
+            if (hiddenId) hiddenId.remove();
+        }
     }
 });
 
@@ -67,7 +78,6 @@ function fillProductForm(select) {
     const addButton = document.getElementById('add-button');
 
     if (!option.value) {
-        // No product selected → reset form and show "Añadir"
         document.getElementById('admin-products').reset();
         if (addButton) addButton.style.display = 'inline-block';
 
@@ -91,7 +101,6 @@ function fillProductForm(select) {
     document.querySelector('[name="product-image"]').value =
         option.dataset.image;
 
-    // Set hidden product ID
     let hiddenInput = document.querySelector('[name="product-id"]');
     if (!hiddenInput) {
         hiddenInput = document.createElement('input');
@@ -101,6 +110,19 @@ function fillProductForm(select) {
     }
     hiddenInput.value = option.value;
 
-    // Hide "Añadir" button when editing
     if (addButton) addButton.style.display = 'none';
 }
+
+document
+    .getElementById('admin-products')
+    .addEventListener('submit', function (e) {
+        const form = e.target;
+        const submitter = document.activeElement;
+
+        const productId = form.querySelector('[name="product-id"]')?.value;
+
+        if (submitter?.value === 'Eliminar' && !productId) {
+            e.preventDefault();
+            alert('No hay ningún producto seleccionado para eliminar.');
+        }
+    });
