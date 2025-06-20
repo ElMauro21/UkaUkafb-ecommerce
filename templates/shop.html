@@ -1,29 +1,28 @@
 {{ template "base" .}}
 <div class="container">
   <div class="product-grid">
+    {{if gt (len .products) 0}} {{range .products}}
     <!-- Product Card -->
     <div class="product-card">
       <div class="image-wrapper">
-        <img
-          src="https://i.postimg.cc/Jzfzx8CM/temp-Imagex-CToip.avif"
-          class="main-image"
-          alt="Product"
-        />
-        <img
-          src="https://i.postimg.cc/Jhj4dFRJ/temp-Image-ELAh-Hx.avif"
-          class="hover-image"
-          alt="Product Hover"
-        />
+        <img src="{{ .Image }}" class="main-image" alt="Product" />
+        <img src="{{ .Image2 }}" class="hover-image" alt="Product Hover" />
       </div>
       <div class="product-info">
-        <h3>Product Name</h3>
-        <p>$29.99</p>
+        <h3>{{ .Name }}</h3>
+        <p>$ {{ .Price }}</p>
       </div>
       <div class="details-button">
         <button>View Details</button>
       </div>
     </div>
+    {{ end }}
   </div>
+  {{ else }}
+  <div class="empty-shop">
+    <img src="/static/images/empty-shop.png" alt="empty-shop" />
+  </div>
+  {{ end }}
 </div>
 
 {{ template "footer" .}}
