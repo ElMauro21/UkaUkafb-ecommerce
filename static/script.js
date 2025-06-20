@@ -160,8 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modalWrapper = document.getElementById('modal-wrapper');
-    const openButtons = document.querySelectorAll('.open-modal');
+    const modalOverlay = document.querySelector('.modal-overlay');
     const closeButton = document.getElementById('close');
+    const openButtons = document.querySelectorAll('.open-modal'); // <- HERE
 
     openButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -169,13 +170,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    closeButton.addEventListener('click', () => {
-        modalWrapper.style.display = 'none';
-    });
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay) {
+                modalWrapper.style.display = 'none';
+            }
+        });
+    }
 
-    window.addEventListener('click', e => {
-        if (e.target === modalWrapper) {
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
             modalWrapper.style.display = 'none';
-        }
-    });
+        });
+    }
 });
