@@ -606,3 +606,108 @@ input[type='number']::-webkit-inner-spin-button {
 .details-button button:hover {
     background-color: #333;
 }
+
+/* Modal product */
+
+.modal-container {
+    height: 450px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    justify-items: stretch;
+    box-sizing: border-box;
+    padding: 21px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.modal-container p {
+    font-family: var(--font-content);
+    font-size: small;
+    text-align: start;
+}
+
+.modal-image {
+    grid-area: 2 / 1 / 6 / 4;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.105);
+    border-radius: 5px;
+}
+
+.modal-image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease;
+}
+
+.modal-name {
+    grid-area: 1 / 1 / 2 / 8;
+    font-family: var(--font-titles);
+    font-weight: 600;
+    padding-bottom: 21px;
+}
+
+.modal-name h1 {
+    text-align: center;
+}
+
+.modal-description {
+    grid-area: 2 / 5 / 6 / 8;
+    font-family: var(--font-titles);
+    font-weight: 600;
+}
+
+.modal-quantity {
+    grid-area: 7 / 1 / 6 / 4;
+    font-family: var(--font-titles);
+    font-weight: 600;
+}
+
+.modal-price {
+    grid-area: 7 / 5 / 6 / 8;
+    font-family: var(--font-titles);
+    font-weight: 600;
+}
+
+.modal-button {
+    grid-area: 8 / 1 / 8 / 8;
+    font-family: var(--font-titles);
+    font-weight: 600;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-button button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.modal-button button:hover {
+    background-color: #333;
+}
+
+.modal-close {
+    grid-area: 1 / 8 / 1 / 8;
+}
+
+.modal-close button {
+    padding: 2px;
+    cursor: pointer;
+}
