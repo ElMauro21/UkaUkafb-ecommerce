@@ -1,124 +1,96 @@
-const loginForm = document.getElementById('login');
-const registerForm = document.getElementById('register');
-const recoverForm = document.getElementById('recover');
-const subMenu = document.getElementById('subMenu');
-const toggleButton = document.getElementById('toggleMenuBtn');
-const changeForm = document.getElementById('passwords');
-const profileForm = document.getElementById('profile');
+document.addEventListener('DOMContentLoaded', () => {
+    // ===== Form Toggles =====
+    const loginForm = document.getElementById('login');
+    const registerForm = document.getElementById('register');
+    const recoverForm = document.getElementById('recover');
+    const subMenu = document.getElementById('subMenu');
+    const toggleButton = document.getElementById('toggleMenuBtn');
+    const changeForm = document.getElementById('passwords');
+    const profileForm = document.getElementById('profile');
 
-function change() {
-    profileForm.style.display = 'none';
-    changeForm.style.display = 'block';
-}
+    window.change = function () {
+        profileForm?.style && (profileForm.style.display = 'none');
+        changeForm?.style && (changeForm.style.display = 'block');
+    };
 
-function profile() {
-    profileForm.style.display = 'block';
-    changeForm.style.display = 'none';
-}
+    window.profile = function () {
+        profileForm?.style && (profileForm.style.display = 'block');
+        changeForm?.style && (changeForm.style.display = 'none');
+    };
 
-function login() {
-    loginForm.style.display = 'block';
-    registerForm.style.display = 'none';
-    recoverForm.style.display = 'none';
-}
+    window.login = function () {
+        loginForm?.style && (loginForm.style.display = 'block');
+        registerForm?.style && (registerForm.style.display = 'none');
+        recoverForm?.style && (recoverForm.style.display = 'none');
+    };
 
-function register() {
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'block';
-    recoverForm.style.display = 'none';
-}
+    window.register = function () {
+        loginForm?.style && (loginForm.style.display = 'none');
+        registerForm?.style && (registerForm.style.display = 'block');
+        recoverForm?.style && (recoverForm.style.display = 'none');
+    };
 
-function recover() {
-    loginForm.style.display = 'none';
-    recoverForm.style.display = 'block';
-}
+    window.recover = function () {
+        loginForm?.style && (loginForm.style.display = 'none');
+        recoverForm?.style && (recoverForm.style.display = 'block');
+    };
 
-function recoverLogin() {
-    loginForm.style.display = 'block';
-    recoverForm.style.display = 'none';
-}
+    window.recoverLogin = function () {
+        loginForm?.style && (loginForm.style.display = 'block');
+        recoverForm?.style && (recoverForm.style.display = 'none');
+    };
 
-if (toggleButton && subMenu) {
-    toggleButton.addEventListener('click', function (event) {
-        event.stopPropagation();
-        subMenu.classList.toggle('open-menu');
-    });
+    if (toggleButton && subMenu) {
+        toggleButton.addEventListener('click', event => {
+            event.stopPropagation();
+            subMenu.classList.toggle('open-menu');
+        });
 
-    document.addEventListener('click', function (event) {
-        if (
-            !subMenu.contains(event.target) &&
-            !toggleButton.contains(event.target)
-        ) {
-            subMenu.classList.remove('open-menu');
-        }
-    });
-}
+        document.addEventListener('click', event => {
+            if (
+                !subMenu.contains(event.target) &&
+                !toggleButton.contains(event.target)
+            ) {
+                subMenu.classList.remove('open-menu');
+            }
+        });
+    }
 
-document.body.addEventListener('htmx:afterSwap', function (evt) {
+    setupAdminProductForm();
+});
+
+// ========== HTMX afterSwap Listener ==========
+document.body.addEventListener('htmx:afterSwap', evt => {
     if (evt.detail.target.id === 'flash') {
         const flash = document.getElementById('flash');
         const type = flash?.getAttribute('data-type');
 
         if (type === 'success') {
             const form = document.getElementById('admin-products');
-            form.reset();
+            form?.reset();
 
             const addButton = document.getElementById('add-button');
             if (addButton) addButton.style.display = 'inline-block';
 
-            const hiddenId = form.querySelector('[name="product-id"]');
+            const hiddenId = form?.querySelector('[name="product-id"]');
             if (hiddenId) hiddenId.remove();
         }
     }
+
+    if (evt.detail.target.id === 'admin-products') {
+        setupAdminProductForm(); // rebind if form is swapped in
+    }
 });
 
-function fillProductForm(select) {
-    const option = select.options[select.selectedIndex];
+// ========== Product Form Handling ==========
+function setupAdminProductForm() {
+    const form = document.getElementById('admin-products');
     const addButton = document.getElementById('add-button');
 
-    if (!option.value) {
-        document.getElementById('admin-products').reset();
-        if (addButton) addButton.style.display = 'inline-block';
+    if (!form) return;
 
-        const hiddenId = document.querySelector('[name="product-id"]');
-        if (hiddenId) hiddenId.remove();
-
-        return;
-    }
-
-    // Fill form fields
-    document.querySelector('[name="product-name"]').value = option.dataset.name;
-    document.querySelector('[name="product-description"]').value =
-        option.dataset.description;
-    document.querySelector('[name="product-weight"]').value =
-        option.dataset.weight;
-    document.querySelector('[name="product-size"]').value = option.dataset.size;
-    document.querySelector('[name="product-price"]').value =
-        option.dataset.price;
-    document.querySelector('[name="product-quantity"]').value =
-        option.dataset.quantity;
-    document.querySelector('[name="product-image"]').value =
-        option.dataset.image;
-    document.querySelector('[name="product-image-two"]').value =
-        option.dataset.image2;
-    let hiddenInput = document.querySelector('[name="product-id"]');
-    if (!hiddenInput) {
-        hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'product-id';
-        document.getElementById('admin-products').appendChild(hiddenInput);
-    }
-    hiddenInput.value = option.value;
-
-    if (addButton) addButton.style.display = 'none';
-}
-
-document
-    .getElementById('admin-products')
-    .addEventListener('submit', function (e) {
-        const form = e.target;
+    form.addEventListener('submit', e => {
         const submitter = document.activeElement;
-
         const productId = form.querySelector('[name="product-id"]')?.value;
 
         if (submitter?.value === 'Eliminar' && !productId) {
@@ -126,3 +98,60 @@ document
             alert('No hay ningún producto seleccionado para eliminar.');
         }
     });
+
+    window.fillProductForm = function (select) {
+        const option = select.options[select.selectedIndex];
+        if (!option.value) {
+            form.reset();
+            if (addButton) addButton.style.display = 'inline-block';
+
+            const hiddenId = form.querySelector('[name="product-id"]');
+            if (hiddenId) hiddenId.remove();
+            return;
+        }
+
+        // Fill form fields
+        form.querySelector('[name="product-name"]').value = option.dataset.name;
+        form.querySelector('[name="product-description"]').value =
+            option.dataset.description;
+        form.querySelector('[name="product-weight"]').value =
+            option.dataset.weight;
+        form.querySelector('[name="product-size"]').value = option.dataset.size;
+        form.querySelector('[name="product-price"]').value =
+            option.dataset.price;
+        form.querySelector('[name="product-quantity"]').value =
+            option.dataset.quantity;
+        form.querySelector('[name="product-image"]').value =
+            option.dataset.image;
+        form.querySelector('[name="product-image-two"]').value =
+            option.dataset.image2;
+
+        let hiddenInput = form.querySelector('[name="product-id"]');
+        if (!hiddenInput) {
+            hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'product-id';
+            form.appendChild(hiddenInput);
+        }
+
+        hiddenInput.value = option.value;
+
+        if (addButton) addButton.style.display = 'none';
+    };
+}
+
+// Price formatted
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.price').forEach(el => {
+        const raw = parseFloat(el.dataset.price);
+        if (!isNaN(raw)) {
+            el.textContent = raw.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 2,
+            });
+        } else {
+            el.textContent = 'Precio no disponible';
+        }
+    });
+});
