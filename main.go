@@ -99,7 +99,7 @@ func main() {
 
   // Shop
   r.GET("/shop", func (c *gin.Context){
-    handlers.HandleOpenShop(c)
+    handlers.HandleOpenShop(c,db)
   })
 
   r.Run() 
