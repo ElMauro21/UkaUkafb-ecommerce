@@ -13,7 +13,7 @@
         <p class="price" data-price="{{ .Price }}"></p>
       </div>
       <div class="details-button">
-        <button>View Details</button>
+        <button class="open-modal">View Details</button>
       </div>
     </div>
     {{ end }}
@@ -24,5 +24,4 @@
   </div>
   {{ end }}
 </div>
-
-{{ template "footer" .}}
+{{ template "modal" .}} {{ template "footer" .}}

@@ -155,3 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Modal product
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modalWrapper = document.getElementById('modal-wrapper');
+    const openButtons = document.querySelectorAll('.open-modal');
+    const closeButton = document.getElementById('close');
+
+    openButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            modalWrapper.style.display = 'flex';
+        });
+    });
+
+    closeButton.addEventListener('click', () => {
+        modalWrapper.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+        if (e.target === modalWrapper) {
+            modalWrapper.style.display = 'none';
+        }
+    });
+});
