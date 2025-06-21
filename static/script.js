@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ========== HTMX afterSwap Listener ==========
-document.body.addEventListener('htmx:afterSwap', evt => {
-    if (evt.detail.target.id === 'flash') {
+document.body.addEventListener('htmx:afterSwap', event => {
+    if (event.detail.target.id === 'flash') {
         const flash = document.getElementById('flash');
         const type = flash?.getAttribute('data-type');
 
@@ -77,8 +77,8 @@ document.body.addEventListener('htmx:afterSwap', evt => {
         }
     }
 
-    if (evt.detail.target.id === 'admin-products') {
-        setupAdminProductForm(); // rebind if form is swapped in
+    if (event.detail.target.id === 'admin-products') {
+        setupAdminProductForm();
     }
 });
 
@@ -89,12 +89,7 @@ function setupAdminProductForm() {
 
     if (!form) return;
 
-    form.addEventListener('submit', e => {
-        const submitter = document.activeElement;
-        const productId = form.querySelector('[name="product-id"]')?.value;
-    });
-
-    window.fillProductForm = function (select) {
+    window.fillProductForm = select => {
         const option = select.options[select.selectedIndex];
         if (!option.value) {
             form.reset();
@@ -105,7 +100,6 @@ function setupAdminProductForm() {
             return;
         }
 
-        // Fill form fields
         form.querySelector('[name="product-name"]').value = option.dataset.name;
         form.querySelector('[name="product-description"]').value =
             option.dataset.description;
@@ -138,16 +132,7 @@ function setupAdminProductForm() {
 // Price formatted
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.price').forEach(el => {
-        const raw = parseFloat(el.dataset.price);
-        if (!isNaN(raw)) {
-            el.textContent = raw.toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 2,
-            });
-        } else {
-            el.textContent = 'Precio no disponible';
-        }
+        el.textContent = formatCOP(el.dataset.price);
     });
 });
 
@@ -164,17 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = button.dataset.name;
             const description = button.dataset.description;
             const quantity = parseInt(button.dataset.quantity);
-            const price = parseFloat(button.dataset.price).toLocaleString(
-                'es-CO',
-                {
-                    style: 'currency',
-                    currency: 'COP',
-                    minimumFractionDigits: 2,
-                }
-            );
+            const price = formatCOP(button.dataset.price);
             const image = button.dataset.image;
 
-            // Populate modal
             document.querySelector(
                 '#modal-container .modal-name h1'
             ).textContent = name;
@@ -188,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 image;
             stockAvailable.textContent = quantity;
 
-            // Reset quantity on open
             currentQty = 1;
             qtyDisplay.textContent = currentQty;
 
@@ -197,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (modalOverlay) {
-        modalOverlay.addEventListener('click', e => {
-            if (e.target === modalOverlay) {
+        modalOverlay.addEventListener('click', event => {
+            if (event.target === modalOverlay) {
                 modalWrapper.style.display = 'none';
             }
         });
