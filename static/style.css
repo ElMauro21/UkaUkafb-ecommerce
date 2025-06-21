@@ -626,16 +626,24 @@ input[type='number']::-webkit-inner-spin-button {
     padding: 21px;
     background: white;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+}
+
+@media (max-width: 540px) {
+    .modal-container {
+        height: 430px;
+        width: 380px;
+    }
 }
 
 .modal-container p {
     font-family: var(--font-content);
     font-size: small;
     text-align: start;
+    position: absolute;
 }
 
 .modal-image {
@@ -776,4 +784,13 @@ input[type='number']::-webkit-inner-spin-button {
     width: 60px;
     text-align: center;
     border-radius: 3px;
+}
+
+.modal-decoration {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    z-index: 99;
+    top: -121px;
+    left: 21px;
 }
