@@ -13,8 +13,17 @@
         <p></p>
       </div>
       <div class="modal-quantity">
-        Tenemos en stock:
-        <p></p>
+        Cantidad:
+        <div class="quantity-control">
+          <button type="button" class="qty-btn" id="qty-decrease">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span id="qty-display">1</span>
+          <button type="button" class="qty-btn" id="qty-increase">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <p>Stock disponible: <span id="stock-available">0</span></p>
       </div>
       <div class="modal-price">
         Precio:

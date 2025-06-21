@@ -55,6 +55,12 @@ header {
     color: white;
 }
 
+@media only screen and (max-width: 540px) {
+    .header-title {
+        display: none;
+    }
+}
+
 .header-nav {
     display: flex;
     gap: 2px;
@@ -63,7 +69,7 @@ header {
 .header-nav-button {
     background-color: transparent;
     border: none;
-    font-size: 21px;
+    font-size: 27px;
     padding: 10px;
     color: white;
     cursor: pointer;
@@ -708,8 +714,17 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .modal-close button {
-    padding: 2px;
+    font-size: 21px;
     cursor: pointer;
+    color: white;
+    background-color: #000;
+    border-radius: 7px;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.modal-close button:hover {
+    background-color: #333;
 }
 
 #modal-wrapper {
@@ -731,4 +746,34 @@ input[type='number']::-webkit-inner-spin-button {
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.quantity-control .qty-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: smaller;
+    color: white;
+    background-color: #000;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.quantity-control .qty-btn:hover {
+    background-color: #333;
+}
+
+#qty-input {
+    width: 60px;
+    text-align: center;
+    border-radius: 3px;
 }

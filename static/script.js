@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const name = button.dataset.name;
             const description = button.dataset.description;
-            const quantity = button.dataset.quantity;
+            const quantity = parseInt(button.dataset.quantity);
             const price = parseFloat(button.dataset.price).toLocaleString(
                 'es-CO',
                 {
@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             const image = button.dataset.image;
 
+            // Populate modal
             document.querySelector(
                 '#modal-container .modal-name h1'
             ).textContent = name;
@@ -181,13 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 '#modal-container .modal-description p'
             ).textContent = description;
             document.querySelector(
-                '#modal-container .modal-quantity p'
-            ).textContent = quantity;
-            document.querySelector(
                 '#modal-container .modal-price p'
             ).textContent = price;
             document.querySelector('#modal-container .modal-image img').src =
                 image;
+            stockAvailable.textContent = quantity;
+
+            // Reset quantity on open
+            currentQty = 1;
+            qtyDisplay.textContent = currentQty;
 
             modalWrapper.style.display = 'flex';
         });
@@ -205,5 +208,24 @@ document.addEventListener('DOMContentLoaded', () => {
         closeButton.addEventListener('click', () => {
             modalWrapper.style.display = 'none';
         });
+    }
+});
+
+let currentQty = 1;
+const qtyDisplay = document.getElementById('qty-display');
+const stockAvailable = document.getElementById('stock-available');
+
+document.getElementById('qty-increase').addEventListener('click', () => {
+    const max = parseInt(stockAvailable.textContent);
+    if (currentQty < max) {
+        currentQty += 1;
+        qtyDisplay.textContent = currentQty;
+    }
+});
+
+document.getElementById('qty-decrease').addEventListener('click', () => {
+    if (currentQty > 1) {
+        currentQty -= 1;
+        qtyDisplay.textContent = currentQty;
     }
 });
