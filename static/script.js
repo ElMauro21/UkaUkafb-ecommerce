@@ -92,11 +92,6 @@ function setupAdminProductForm() {
     form.addEventListener('submit', e => {
         const submitter = document.activeElement;
         const productId = form.querySelector('[name="product-id"]')?.value;
-
-        if (submitter?.value === 'Eliminar' && !productId) {
-            e.preventDefault();
-            alert('No hay ningún producto seleccionado para eliminar.');
-        }
     });
 
     window.fillProductForm = function (select) {
@@ -162,10 +157,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalWrapper = document.getElementById('modal-wrapper');
     const modalOverlay = document.querySelector('.modal-overlay');
     const closeButton = document.getElementById('close');
-    const openButtons = document.querySelectorAll('.open-modal'); // <- HERE
+    const openButtons = document.querySelectorAll('.open-modal');
 
     openButtons.forEach(button => {
         button.addEventListener('click', () => {
+            const name = button.dataset.name;
+            const description = button.dataset.description;
+            const quantity = button.dataset.quantity;
+            const price = parseFloat(button.dataset.price).toLocaleString(
+                'es-CO',
+                {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 2,
+                }
+            );
+            const image = button.dataset.image;
+
+            document.querySelector(
+                '#modal-container .modal-name h1'
+            ).textContent = name;
+            document.querySelector(
+                '#modal-container .modal-description p'
+            ).textContent = description;
+            document.querySelector(
+                '#modal-container .modal-quantity p'
+            ).textContent = quantity;
+            document.querySelector(
+                '#modal-container .modal-price p'
+            ).textContent = price;
+            document.querySelector('#modal-container .modal-image img').src =
+                image;
+
             modalWrapper.style.display = 'flex';
         });
     });

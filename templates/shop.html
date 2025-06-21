@@ -13,7 +13,16 @@
         <p class="price" data-price="{{ .Price }}"></p>
       </div>
       <div class="details-button">
-        <button class="open-modal">View Details</button>
+        <button
+          class="open-modal"
+          data-name="{{ .Name }}"
+          data-description="{{ .Description }}"
+          data-price="{{ .Price }}"
+          data-quantity="{{ .Quantity }}"
+          data-image="{{ .Image }}"
+        >
+          View Details
+        </button>
       </div>
     </div>
     {{ end }}
