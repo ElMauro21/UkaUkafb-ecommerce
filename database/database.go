@@ -50,7 +50,8 @@ image_url_2 TEXT
 mustExec(db,`
 CREATE TABLE IF NOT EXISTS carts (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-user_id INTEGER NOT NULL,
+user_id INTEGER,
+session_id TEXT,
 FOREIGN KEY(user_id) REFERENCES users(id)
 );`)
 mustExec(db,`
