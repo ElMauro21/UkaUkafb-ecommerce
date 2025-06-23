@@ -65,7 +65,10 @@
           <i class="fa-solid fa-shop"></i>
         </button>
         <button class="header-nav-button">
-          <i class="fa-solid fa-cart-shopping"></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            onclick="window.location.href='/cart'"
+          ></i>
         </button>
         {{ if .loggedIn }}
         <button class="header-nav-button" id="toggleMenuBtn">

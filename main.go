@@ -102,5 +102,10 @@ func main() {
     handlers.HandleOpenShop(c,db)
   })
 
+  // Cart
+  r.GET("/cart", func (c *gin.Context){
+    handlers.HandleOpenCart(c)
+  })
+
   r.Run() 
 }
