@@ -2,35 +2,32 @@ package cart
 
 import (
 	"database/sql"
-	"net/http"
 
+	"github.com/ElMauro21/UkaUkafb/helpers/auth"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
 
-func CreateCart(c *gin.Context, db *sql.DB){
+func CreateCart(c *gin.Context, db *sql.DB) error{
 
 	session := sessions.Default(c)
 	email := session.Get("user")
 	
 	if email != nil{
-		var userID int 
-		err := db.QueryRow("SELECT id FROM users WHERE email = ?", email).Scan(&userID)
+		userID,err := auth.GetUserId(c,db)
 		if err != nil {
-			c.String(http.StatusInternalServerError, "No se ha podido encontrar usuario.")
-			return
+			return err
 		}
 
 		var count int
 		err = db.QueryRow("SELECT COUNT(*) FROM carts WHERE user_id = ?", userID).Scan(&count)
 		if err != nil {
-			c.String(http.StatusInternalServerError, "No se ha podido verificar carrito de compras.")
-			return
+			return err
 		}
 		
 		if count > 0{
-			return
+			return nil
 		}
 
 		_,err = db.Exec(`INSERT INTO carts
@@ -38,30 +35,26 @@ func CreateCart(c *gin.Context, db *sql.DB){
 		userID,
 		)
 		if err != nil{
-			c.String(http.StatusInternalServerError, "No se ha podido crear carrito.")
-			return
+			return err
 		}
 	} else {
 		sessionID := session.Get("cart_session_id")
 		if sessionID == nil {
 			sessionID = uuid.New().String()
 			session.Set("cart_session_id",sessionID)
-			session.Save()
 			if err := session.Save(); err != nil {
-				c.String(http.StatusInternalServerError, "No se pudo guardar la sesión.")
-				return
+				return err
 			}
 		}
 
 		var count int
 		err := db.QueryRow("SELECT COUNT(*) FROM carts WHERE session_id = ?", sessionID).Scan(&count)
 		if err != nil {
-			c.String(http.StatusInternalServerError, "No se ha podido verificar carrito de compras.")
-			return
+			return err
 		}
 		
 		if count > 0{
-			return
+			return nil
 		}
 
 		_,err = db.Exec(`INSERT INTO carts
@@ -69,8 +62,27 @@ func CreateCart(c *gin.Context, db *sql.DB){
 		sessionID,
 		)
 		if err != nil{
-			c.String(http.StatusInternalServerError, "No se ha podido crear carrito.")
-			return
+			return err 
 		}
+	}
+	return nil
+}
+
+func GetCartID(c *gin.Context, db *sql.DB) (int, error) {
+	session := sessions.Default(c)
+	email := session.Get("user")
+
+	var cartID int
+	if email != nil {
+		userID,err  := auth.GetUserId(c, db)
+		if err != nil {
+			return 0,err
+		}
+		err = db.QueryRow("SELECT id FROM carts WHERE user_id = ?", userID).Scan(&cartID)
+		return cartID, err
+	} else {
+		sessionID := session.Get("cart_session_id")
+		err := db.QueryRow("SELECT id FROM carts WHERE session_id = ?", sessionID).Scan(&cartID)
+		return cartID, err
 	}
 }

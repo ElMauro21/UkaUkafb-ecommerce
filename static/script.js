@@ -146,12 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openButtons.forEach(button => {
         button.addEventListener('click', () => {
+            const productID = button.dataset.id;
             const name = button.dataset.name;
             const description = button.dataset.description;
             const quantity = parseInt(button.dataset.quantity);
             const price = formatCOP(button.dataset.price);
             const image = button.dataset.image;
 
+            document.querySelector(
+                '#modal-container input[name="product-id"]'
+            ).value = productID;
             document.querySelector(
                 '#modal-container .modal-name h1'
             ).textContent = name;
@@ -190,12 +194,14 @@ document.addEventListener('DOMContentLoaded', () => {
 let currentQty = 1;
 const qtyDisplay = document.getElementById('qty-display');
 const stockAvailable = document.getElementById('stock-available');
+const quantityHidden = document.getElementById('quantity-hidden');
 
 document.getElementById('qty-increase').addEventListener('click', () => {
     const max = parseInt(stockAvailable.textContent);
     if (currentQty < max) {
         currentQty += 1;
         qtyDisplay.textContent = currentQty;
+        quantityHidden.value = currentQty;
     }
 });
 
@@ -203,5 +209,6 @@ document.getElementById('qty-decrease').addEventListener('click', () => {
     if (currentQty > 1) {
         currentQty -= 1;
         qtyDisplay.textContent = currentQty;
+        quantityHidden.value = currentQty;
     }
 });
