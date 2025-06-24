@@ -14,6 +14,11 @@ type Product struct {
 	Image2 string
 }
 
+type cart struct {
+    ID int
+    
+}
+
 func LoadProducts(db *sql.DB) []Product{
 	    rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url, image_url_2 FROM products`)
     var products []Product

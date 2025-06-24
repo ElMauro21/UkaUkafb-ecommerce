@@ -1,3 +1,32 @@
 {{ template "base" .}}
-<div>This is the cart</div>
+<h1 class="page-title">Carrito de compras</h1>
+<div class="cart-content">
+  <div class="cart-section">
+    <div class="cart-container">
+      <div class="cart-header-product">Producto</div>
+      <div class="cart-header-quantity">Cantidad</div>
+      <div class="cart-header-price">Precio unitario</div>
+      <div class="cart-header-subtotal">Subtotal</div>
+    </div>
+    <div class="cart-item">
+      <div class="cart-item-img">Here the image</div>
+      <div class="cart-item-name">Here the name</div>
+      <div class="cart-item-quantity">Here the quantity</div>
+      <div class="cart-item-price">Here the price</div>
+      <div class="cart-item-subtotal">Here the subtotal</div>
+    </div>
+  </div>
+  <div class="personal-data-section">
+    <h1>Datos personales</h1>
+    <div class="cart-personal-data-input">Nombres</div>
+    <div class="cart-personal-data-input">Apellidos</div>
+    <div class="cart-personal-data-input">Documento</div>
+    <div class="cart-personal-data-input">Teléfono</div>
+    <div class="cart-personal-data-input">Correo electrónico</div>
+    <div class="cart-personal-data-input">Departamento</div>
+    <div class="cart-personal-data-input">Ciudad</div>
+    <div class="cart-personal-data-input">Barrio</div>
+    <div class="cart-personal-data-input">Dirección</div>
+  </div>
+</div>
 {{ template "footer" .}}

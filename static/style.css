@@ -1,8 +1,30 @@
 :root {
-    --background-color: rgb(255, 255, 255);
+    --background-color: white;
     --font-titles: 'Concert One', sans-serif;
     --font-content: Arial, sans-serif;
     --font-content-color: rgb(0, 0, 0);
+    --main-color: #000000d8;
+    --contrast-color: white;
+    --background-forms: rgba(0, 0, 0, 0.542);
+    --background-input: rgba(255, 255, 255, 0.2);
+    --background-input-hover: rgba(255, 255, 255, 0.25);
+    --submit-form-color: black;
+    --submit-form-background: rgba(255, 255, 255, 0.7);
+    --submit-form-hover: rgba(255, 255, 255, 0.5);
+    --prices-color: #777;
+    --button-color: black;
+    --button-hover: #333;
+}
+
+/* Web Kit */
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+::-webkit-input-placeholder {
+    color: var(--contrast-color);
 }
 
 body,
@@ -24,7 +46,7 @@ body {
 
 header {
     top: 0;
-    background-color: #000000d8;
+    background-color: var(--main-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,13 +74,7 @@ header {
 
 .header-title {
     font-family: var(--font-titles);
-    color: white;
-}
-
-@media only screen and (max-width: 540px) {
-    .header-title {
-        display: none;
-    }
+    color: var(--contrast-color);
 }
 
 .header-nav {
@@ -71,7 +87,7 @@ header {
     border: none;
     font-size: 27px;
     padding: 10px;
-    color: white;
+    color: var(--contrast-color);
     cursor: pointer;
     border-radius: 10%;
     transform: translateZ(0) scale(0.9);
@@ -95,7 +111,7 @@ header {
     top: -10px;
     right: -10px;
     font-size: 14px;
-    color: rgb(255, 255, 255);
+    color: var(--contrast-color);
     background: rgb(210, 103, 51);
     border-radius: 50%;
     padding: 2.5px;
@@ -119,14 +135,14 @@ header {
 }
 
 .sub-menu {
-    background: #333333;
+    background: var(--main-color);
     padding: 20px;
     margin: 10px;
     border-radius: 5px;
 }
 
 .sub-menu h3 {
-    color: rgb(255, 255, 255);
+    color: var(--contrast-color);
     font-size: smaller;
 }
 
@@ -144,7 +160,7 @@ header {
     width: 100%;
     align-items: center;
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: var(--contrast-color);
     margin: 12px 0;
     cursor: pointer;
 }
@@ -155,8 +171,8 @@ header {
 
 .sub-menu-link i {
     font-size: 10px;
-    color: #000000d8;
-    background: rgb(255, 255, 255);
+    color: var(--main-color);
+    background: var(--contrast-color);
     border-radius: 50%;
     padding: 8px;
     margin-right: 15px;
@@ -188,7 +204,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.542);
+    background-color: var(--background-forms);
 }
 
 .form-box {
@@ -271,7 +287,7 @@ header {
 /* ------------- */
 
 .top span {
-    color: white;
+    color: var(--contrast-color);
     font-size: small;
     padding: 20px 21px 0 0;
     display: flex;
@@ -279,7 +295,7 @@ header {
 }
 
 .bottom span {
-    color: white;
+    color: var(--contrast-color);
     font-size: small;
     padding: 20px 21px 0 0;
     display: flex;
@@ -288,14 +304,14 @@ header {
 
 .bottom span a {
     font-weight: 500;
-    color: white;
+    color: var(--contrast-color);
     margin-left: 5px;
 }
 
 .bottom p {
     padding-top: 30px;
     font-weight: 500;
-    color: white;
+    color: var(--contrast-color);
     margin-left: 5px;
     font-size: small;
     justify-content: center;
@@ -303,12 +319,12 @@ header {
 
 .top span a {
     font-weight: 500;
-    color: white;
+    color: var(--contrast-color);
     margin-left: 5px;
 }
 
 .form-title {
-    color: white;
+    color: var(--contrast-color);
     font-size: 30px;
     text-align: center;
     padding: 0 21px 0 0;
@@ -316,8 +332,8 @@ header {
 
 .input-field {
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: var(--background-input);
+    color: var(--contrast-color);
     height: 50px;
     width: 90%;
     padding: 0 5px 0 45px;
@@ -329,11 +345,7 @@ header {
 
 .input-field:hover,
 .input-field:focus {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-::-webkit-input-placeholder {
-    color: white;
+    background: var(--background-input-hover);
 }
 
 .form-box {
@@ -349,48 +361,26 @@ header {
     position: relative;
     top: -33px;
     left: 17px;
-    color: white;
+    color: var(--contrast-color);
 }
 
 .submit {
     font-size: 16px;
     font-weight: 500;
-    color: black;
+    color: var(--submit-form-color);
     height: 45px;
     width: 100%;
     border: none;
     border-radius: 30px;
     outline: none;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--submit-form-background);
     cursor: pointer;
     transition: 0.3s ease-in-out;
 }
 
 .submit:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--submit-form-hover);
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-}
-
-@media only screen and (max-width: 540px) {
-    .form-box {
-        width: 100%;
-    }
-
-    .register-container,
-    .login-container,
-    .recover-container,
-    .reset-pass,
-    .profile-container,
-    .passwords-container {
-        width: 90%;
-        padding: 0 20px 0 10px;
-    }
-}
-
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 /* Dashboard */
@@ -412,7 +402,7 @@ input[type='number']::-webkit-inner-spin-button {
     height: 100%;
     box-sizing: border-box;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.542);
+    background-color: var(--background-forms);
     align-items: center;
 }
 
@@ -422,18 +412,6 @@ input[type='number']::-webkit-inner-spin-button {
     box-sizing: border-box;
     padding: 1rem;
     background-color: blue;
-}
-
-@media (max-width: 600px) {
-    .dashboard-container {
-        height: auto;
-    }
-
-    .admin-orders,
-    .admin-products {
-        width: 100%;
-        height: auto;
-    }
 }
 
 .item {
@@ -457,14 +435,18 @@ input[type='number']::-webkit-inner-spin-button {
 
 .input-field-dash {
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: var(--background-input);
+    color: var(--contrast-color);
     height: 50px;
     width: 100%;
     border: none;
     border-radius: 15px;
     outline: none;
     transition: 0.2s ease;
+}
+
+.input-field-dash:hover {
+    background: var(--background-input-hover);
 }
 
 .input-field-dash::placeholder {
@@ -507,12 +489,6 @@ input[type='number']::-webkit-inner-spin-button {
     transition: all 0.3s ease-in-out;
     margin-right: 21px;
     margin-left: 21px;
-}
-
-@media (max-width: 760px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 /* Fixed-size cards */
@@ -571,11 +547,11 @@ input[type='number']::-webkit-inner-spin-button {
     margin: 0;
     font-family: var(--font-titles);
     font-size: 1.1rem;
-    color: #222;
+    color: var(--main-color);
 }
 
 .product-info p {
-    color: #666;
+    color: var(--prices-color);
     margin-top: 6px;
     font-size: 0.95rem;
     font-family: var(--font-titles);
@@ -599,8 +575,8 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .details-button button {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--button-color);
+    color: var(--contrast-color);
     padding: 10px 18px;
     border: none;
     border-radius: 20px;
@@ -610,7 +586,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .details-button button:hover {
-    background-color: #333;
+    background-color: var(--button-hover);
 }
 
 /* Modal product */
@@ -630,13 +606,6 @@ input[type='number']::-webkit-inner-spin-button {
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-}
-
-@media (max-width: 540px) {
-    .modal-container {
-        height: 430px;
-        width: 380px;
-    }
 }
 
 .modal-container p {
@@ -703,8 +672,8 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .modal-button button {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--button-color);
+    color: var(--contrast-color);
     padding: 10px 18px;
     border: none;
     border-radius: 20px;
@@ -714,7 +683,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .modal-button button:hover {
-    background-color: #333;
+    background-color: var(--button-hover);
 }
 
 .modal-close {
@@ -724,15 +693,15 @@ input[type='number']::-webkit-inner-spin-button {
 .modal-close button {
     font-size: 21px;
     cursor: pointer;
-    color: white;
-    background-color: #000;
+    color: var(--contrast-color);
+    background-color: var(--button-color);
     border-radius: 7px;
     border: none;
     transition: background 0.3s ease;
 }
 
 .modal-close button:hover {
-    background-color: #333;
+    background-color: var(--button-hover);
 }
 
 #modal-wrapper {
@@ -770,14 +739,14 @@ input[type='number']::-webkit-inner-spin-button {
     cursor: pointer;
     border-radius: 7px;
     font-size: smaller;
-    color: white;
-    background-color: #000;
+    color: var(--contrast-color);
+    background-color: var(--button-color);
     border: none;
     transition: background 0.3s ease;
 }
 
 .quantity-control .qty-btn:hover {
-    background-color: #333;
+    background-color: var(--button-hover);
 }
 
 #qty-input {
@@ -793,4 +762,125 @@ input[type='number']::-webkit-inner-spin-button {
     z-index: 99;
     top: -121px;
     left: 21px;
+}
+
+/* cart */
+
+.cart-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.cart-section {
+    width: 60%;
+}
+
+.personal-data-section {
+    width: 40%;
+}
+
+.personal-data-section h1 {
+    margin-top: -15px;
+    font-family: var(--font-titles);
+}
+
+.page-title {
+    font-family: var(--font-titles);
+    padding-left: 21px;
+    padding-bottom: 21px;
+}
+
+.cart-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    font-family: var(--font-titles);
+    padding-left: 21px;
+    gap: 10px;
+}
+
+.cart-header-quantity {
+    grid-column-start: 3;
+}
+
+.cart-header-price {
+    grid-column-start: 4;
+}
+
+.cart-header-subtotal {
+    grid-column-start: 5;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    padding-left: 21px;
+    margin-top: -21px;
+    gap: 10px;
+}
+
+.cart-item-img {
+    grid-row: span 3 / span 3;
+}
+
+.cart-item-quantity {
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+
+.cart-item-price {
+    grid-column-start: 4;
+    grid-row-start: 1;
+}
+
+.cart-item-subtotal {
+    grid-column-start: 5;
+    grid-row-start: 1;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 540px) {
+    .header-title {
+        display: none;
+    }
+
+    .modal-container {
+        height: 430px;
+        width: 380px;
+    }
+
+    .form-box {
+        width: 100%;
+    }
+
+    .register-container,
+    .login-container,
+    .recover-container,
+    .reset-pass,
+    .profile-container,
+    .passwords-container {
+        width: 90%;
+        padding: 0 20px 0 10px;
+    }
+
+    .dashboard-container {
+        height: auto;
+    }
+
+    .admin-orders,
+    .admin-products {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 760px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
