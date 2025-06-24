@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             currentQty = 1;
             qtyDisplay.textContent = currentQty;
+            quantityHidden.value = currentQty;
 
             modalWrapper.style.display = 'flex';
         });
