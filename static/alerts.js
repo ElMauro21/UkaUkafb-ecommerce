@@ -7,7 +7,7 @@ function showFlashAlert() {
         if (message) {
             Swal.fire({
                 toast: true,
-                position: 'top-end',
+                position: 'top-start',
                 icon: type || 'info',
                 title: message,
                 showConfirmButton: false,

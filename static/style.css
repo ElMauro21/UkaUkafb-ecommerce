@@ -1,7 +1,7 @@
 :root {
     --background-color: white;
     --font-titles: 'Concert One', sans-serif;
-    --font-content: Arial, sans-serif;
+    --font-content: 'Concert One', sans-serif;
     --font-content-color: rgb(0, 0, 0);
     --main-color: #000000d8;
     --contrast-color: white;
@@ -341,6 +341,7 @@ header {
     border-radius: 30px;
     outline: none;
     transition: 0.2s ease;
+    font-family: var(--font-content);
 }
 
 .input-field:hover,
@@ -376,6 +377,7 @@ header {
     background: var(--submit-form-background);
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    font-family: var(--font-content);
 }
 
 .submit:hover {
@@ -583,6 +585,7 @@ header {
     cursor: pointer;
     font-size: 0.9rem;
     transition: background 0.3s ease;
+    font-family: var(--font-content);
 }
 
 .details-button button:hover {
@@ -648,6 +651,7 @@ header {
     grid-area: 2 / 5 / 6 / 8;
     font-family: var(--font-titles);
     font-weight: 600;
+    margin: 5px;
 }
 
 .modal-quantity {
@@ -680,6 +684,7 @@ header {
     cursor: pointer;
     font-size: 0.9rem;
     transition: background 0.3s ease;
+    font-family: var(--font-content);
 }
 
 .modal-button button:hover {
@@ -765,26 +770,8 @@ header {
 }
 
 /* cart */
-
-.cart-content {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
 .cart-section {
-    width: 60%;
-}
-
-.personal-data-section {
-    width: 39%;
-    border-left: 1px solid #ccc;
-    padding-left: 5px;
-}
-
-.personal-data-section h1 {
-    margin-top: -15px;
-    font-family: var(--font-titles);
+    width: 100%;
 }
 
 .page-title {
@@ -828,8 +815,9 @@ header {
 }
 
 .cart-item-image-img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ccc;
 }
 
 .cart-item-quantity {
@@ -845,6 +833,7 @@ header {
 .cart-item-subtotal {
     grid-column-start: 5;
     grid-row-start: 1;
+    font-size: large;
 }
 
 /* Responsive */
@@ -887,25 +876,5 @@ header {
     .admin-products {
         width: 100%;
         height: auto;
-    }
-
-    .cart-content {
-        height: auto;
-    }
-
-    .cart-container,
-    .personal-data-section {
-        width: 100%;
-        height: auto;
-    }
-
-    .cart-section {
-        width: 100%;
-        margin: 5px;
-    }
-
-    .cart-item {
-        width: 100%;
-        margin: 5px;
     }
 }

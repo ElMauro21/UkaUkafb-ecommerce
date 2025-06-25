@@ -132,7 +132,7 @@ function setupAdminProductForm() {
 // Price formatted
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.price').forEach(el => {
-        el.textContent = formatCOP(el.dataset.price);
+        el.textContent = formatCOP(el.textContent);
     });
 });
 
@@ -213,3 +213,7 @@ document.getElementById('qty-decrease').addEventListener('click', () => {
         quantityHidden.value = currentQty;
     }
 });
+
+/* cart */
+
+const cartPrice = document.querySelector('cart-item-price');

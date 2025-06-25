@@ -1,42 +1,24 @@
 {{ template "base" .}}
 <h1 class="page-title">Carrito de compras</h1>
-<div class="cart-content">
-  <div class="cart-section">
-    <div class="cart-container">
-      <div class="cart-header-product">Producto</div>
-      <div class="cart-header-quantity">Cantidad</div>
-      <div class="cart-header-price">Precio unitario</div>
-      <div class="cart-header-subtotal">Subtotal</div>
-    </div>
-    {{ range .items }}
-    <div class="cart-item">
-      <div class="cart-item-img">
-        <img
-          src="{{ .Image }}"
-          alt="Product Image"
-          class="cart-item-image-img"
-        />
-      </div>
-      <div class="cart-item-name">{{ .Name }}</div>
-      <div class="cart-item-quantity">{{ .Quantity }}</div>
-      <div class="cart-item-price">{{ .Price }}</div>
-      <div class="cart-item-subtotal">{{ .Subtotal }}</div>
-    </div>
-    {{ else }}
-    <p>Tu carrito está vacío.</p>
-    {{ end }}
+<div class="cart-section">
+  <div class="cart-container">
+    <div class="cart-header-product">Producto</div>
+    <div class="cart-header-quantity">Cantidad</div>
+    <div class="cart-header-price">Precio unitario</div>
+    <div class="cart-header-subtotal">Subtotal</div>
   </div>
-  <div class="personal-data-section">
-    <h1>Pago</h1>
-    <div class="cart-personal-data-input">Nombres</div>
-    <div class="cart-personal-data-input">Apellidos</div>
-    <div class="cart-personal-data-input">Documento</div>
-    <div class="cart-personal-data-input">Teléfono</div>
-    <div class="cart-personal-data-input">Correo electrónico</div>
-    <div class="cart-personal-data-input">Departamento</div>
-    <div class="cart-personal-data-input">Ciudad</div>
-    <div class="cart-personal-data-input">Barrio</div>
-    <div class="cart-personal-data-input">Dirección</div>
+  {{ range .items }}
+  <div class="cart-item">
+    <div class="cart-item-img">
+      <img src="{{ .Image }}" alt="Product Image" class="cart-item-image-img" />
+    </div>
+    <div class="cart-item-name">{{ .Name }}</div>
+    <div class="cart-item-quantity">{{ .Quantity }}</div>
+    <div class="cart-item-price price">{{ .Price }}</div>
+    <div class="cart-item-subtotal price">{{ .Subtotal }}</div>
   </div>
+  {{ else }}
+  <p>Tu carrito está vacío.</p>
+  {{ end }}
 </div>
 {{ template "footer" .}}
