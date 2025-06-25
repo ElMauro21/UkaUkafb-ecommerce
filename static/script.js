@@ -190,30 +190,37 @@ document.addEventListener('DOMContentLoaded', () => {
             modalWrapper.style.display = 'none';
         });
     }
-});
 
-let currentQty = 1;
-const qtyDisplay = document.getElementById('qty-display');
-const stockAvailable = document.getElementById('stock-available');
-const quantityHidden = document.getElementById('quantity-hidden');
+    let currentQty = 1;
+    const qtyDisplay = document.getElementById('qty-display');
+    const stockAvailable = document.getElementById('stock-available');
+    const quantityHidden = document.getElementById('quantity-hidden');
 
-document.getElementById('qty-increase').addEventListener('click', () => {
-    const max = parseInt(stockAvailable.textContent);
-    if (currentQty < max) {
-        currentQty += 1;
-        qtyDisplay.textContent = currentQty;
-        quantityHidden.value = currentQty;
+    const increaseBtn = document.getElementById('qty-increase');
+    const decreaseBtn = document.getElementById('qty-decrease');
+
+    if (
+        increaseBtn &&
+        decreaseBtn &&
+        qtyDisplay &&
+        stockAvailable &&
+        quantityHidden
+    ) {
+        increaseBtn.addEventListener('click', () => {
+            const max = parseInt(stockAvailable.textContent);
+            if (currentQty < max) {
+                currentQty += 1;
+                qtyDisplay.textContent = currentQty;
+                quantityHidden.value = currentQty;
+            }
+        });
+
+        decreaseBtn.addEventListener('click', () => {
+            if (currentQty > 1) {
+                currentQty -= 1;
+                qtyDisplay.textContent = currentQty;
+                quantityHidden.value = currentQty;
+            }
+        });
     }
 });
-
-document.getElementById('qty-decrease').addEventListener('click', () => {
-    if (currentQty > 1) {
-        currentQty -= 1;
-        qtyDisplay.textContent = currentQty;
-        quantityHidden.value = currentQty;
-    }
-});
-
-/* cart */
-
-const cartPrice = document.querySelector('cart-item-price');
