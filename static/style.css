@@ -592,7 +592,7 @@ header {
 /* Modal product */
 
 .modal-container {
-    height: 450px;
+    height: 400px;
     width: 400px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -606,6 +606,7 @@ header {
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    top: 0;
 }
 
 .modal-container p {
@@ -637,7 +638,6 @@ header {
     grid-area: 1 / 1 / 2 / 8;
     font-family: var(--font-titles);
     font-weight: 600;
-    padding-bottom: 21px;
 }
 
 .modal-name h1 {
@@ -756,11 +756,11 @@ header {
 }
 
 .modal-decoration {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     position: absolute;
     z-index: 99;
-    top: -121px;
+    top: -91px;
     left: 21px;
 }
 
