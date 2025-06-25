@@ -1,6 +1,8 @@
 package products
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type Product struct {
     ID       int
@@ -14,13 +16,8 @@ type Product struct {
 	Image2 string
 }
 
-type cart struct {
-    ID int
-    
-}
-
 func LoadProducts(db *sql.DB) []Product{
-	    rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url, image_url_2 FROM products`)
+	rows, _ := db.Query(`SELECT id, name, description, weight, size, price, quantity, image_url, image_url_2 FROM products`)
     var products []Product
 
     for rows.Next() {
@@ -30,3 +27,4 @@ func LoadProducts(db *sql.DB) []Product{
     }
 	return products
 }
+

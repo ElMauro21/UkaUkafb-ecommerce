@@ -777,7 +777,9 @@ header {
 }
 
 .personal-data-section {
-    width: 40%;
+    width: 39%;
+    border-left: 1px solid #ccc;
+    padding-left: 5px;
 }
 
 .personal-data-section h1 {
@@ -816,10 +818,18 @@ header {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     margin: 5px;
+    margin-top: 15px;
+    border-bottom: 1px solid #ccc;
+    height: 111px;
 }
 
 .cart-item-img {
     grid-row: span 3 / span 3;
+}
+
+.cart-item-image-img {
+    width: 100px;
+    height: 100px;
 }
 
 .cart-item-quantity {

@@ -12,14 +12,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HandleOpenCart(c *gin.Context){
+func HandleOpenCart(c *gin.Context, db *sql.DB){
 	
+	items,err := cart.LoadCartItems(c,db)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Error al cargar el carrito: " + err.Error())
+		return
+	}
+
 	msg,msgType := flash.GetMessage(c)
 
 	view.Render(c,http.StatusOK,"cart.html",gin.H{
 		"title": "My cart",
 		"Message": msg,
 		"MessageType": msgType,
+		"items": items,
 	})
 }
 
