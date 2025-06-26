@@ -846,6 +846,11 @@ header {
     font-size: large;
 }
 
+.empty-cart img {
+    height: 250px;
+    width: 100%;
+}
+
 /* Responsive */
 
 @media only screen and (max-width: 540px) {

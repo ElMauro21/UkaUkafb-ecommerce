@@ -3,10 +3,12 @@
   <h1 class="page-title">Carrito de compras</h1>
   <div class="cart-section">
     <div class="cart-container">
+      {{ if .items }}
       <div class="cart-header-product">Producto</div>
       <div class="cart-header-quantity">Cantidad</div>
       <div class="cart-header-price">Precio unitario</div>
       <div class="cart-header-subtotal">Subtotal</div>
+      {{end}}
     </div>
     {{ range .items }}
     <div class="cart-item">
@@ -23,7 +25,9 @@
       <div class="cart-item-subtotal price">{{ .Subtotal }}</div>
     </div>
     {{ else }}
-    <p>Tu carrito está vacío.</p>
+    <div class="empty-cart">
+      <img src="/static/images/empty-cart.png" alt="empty-cart" />
+    </div>
     {{ end }}
   </div>
 </main>
