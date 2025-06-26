@@ -1,37 +1,39 @@
 {{ template "base" .}}
-<div class="container">
-  <div class="product-grid">
-    {{if gt (len .products) 0}} {{range .products}}
-    <!-- Product Card -->
-    <div class="product-card">
-      <div class="image-wrapper">
-        <img src="{{ .Image }}" class="main-image" alt="Product" />
-        <img src="{{ .Image2 }}" class="hover-image" alt="Product Hover" />
+<main>
+  <div class="container">
+    <div class="product-grid">
+      {{if gt (len .products) 0}} {{range .products}}
+      <!-- Product Card -->
+      <div class="product-card">
+        <div class="image-wrapper">
+          <img src="{{ .Image }}" class="main-image" alt="Product" />
+          <img src="{{ .Image2 }}" class="hover-image" alt="Product Hover" />
+        </div>
+        <div class="product-info">
+          <h3>{{ .Name }}</h3>
+          <p class="price">{{ .Price }}</p>
+        </div>
+        <div class="details-button">
+          <button
+            class="open-modal"
+            data-id="{{ .ID }}"
+            data-name="{{ .Name }}"
+            data-description="{{ .Description }}"
+            data-price="{{ .Price }}"
+            data-quantity="{{ .Quantity }}"
+            data-image="{{ .Image }}"
+          >
+            Detalles
+          </button>
+        </div>
       </div>
-      <div class="product-info">
-        <h3>{{ .Name }}</h3>
-        <p class="price">{{ .Price }}</p>
-      </div>
-      <div class="details-button">
-        <button
-          class="open-modal"
-          data-id="{{ .ID }}"
-          data-name="{{ .Name }}"
-          data-description="{{ .Description }}"
-          data-price="{{ .Price }}"
-          data-quantity="{{ .Quantity }}"
-          data-image="{{ .Image }}"
-        >
-          Detalles
-        </button>
-      </div>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-shop">
+      <img src="/static/images/empty-shop.png" alt="empty-shop" />
     </div>
     {{ end }}
   </div>
-  {{ else }}
-  <div class="empty-shop">
-    <img src="/static/images/empty-shop.png" alt="empty-shop" />
-  </div>
-  {{ end }}
-</div>
-{{ template "modal" .}} {{ template "footer" .}}
+</main>
+{{ template "modal" .}} {{ template "footer" . }}
