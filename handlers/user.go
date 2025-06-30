@@ -160,3 +160,37 @@ func HandleChangePassword(c *gin.Context, db *sql.DB) {
 	c.Header("HX-Redirect","/user/profile")
 	c.Status(http.StatusSeeOther)
 }
+
+func HandleDeleteAccount(c *gin.Context,db *sql.DB){
+	session := sessions.Default(c)
+	email := session.Get("user")
+	if email == nil {
+		c.Redirect(http.StatusSeeOther, "/auth/login")
+		return
+	}
+
+	currentPass := c.PostForm("current-password")
+	var storedHash string
+	err := db.QueryRow("SELECT password_hash FROM users WHERE email = ?", email).Scan(&storedHash)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "No se pudo verificar tu contraseña actual.")
+		return
+	}
+
+	if err := auth.ComparePasswords(storedHash, currentPass); err != nil {
+		view.RenderFlash(c,http.StatusOK,"La contraseña actual es incorrecta","error")
+		return
+	}
+
+	_, err = db.Exec("DELETE FROM users WHERE email = ?", email)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Error al eliminar usuario.")
+		return
+	}
+
+	session.Clear()
+	session.Save()
+	flash.SetMessage(c,"Cuenta eliminada correctamente","success")
+	c.Header("HX-Redirect","/auth/login")
+	c.Status(http.StatusSeeOther)
+}

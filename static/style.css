@@ -234,7 +234,8 @@ header {
 .recover-container,
 .reset-pass,
 .profile-container,
-.passwords-container {
+.passwords-container,
+.eliminate-account-container {
     position: absolute;
     width: 500px;
     display: flex;
@@ -292,6 +293,10 @@ header {
 }
 
 .passwords-container {
+    display: none;
+}
+
+.eliminate-account-container {
     display: none;
 }
 /* ------------- */

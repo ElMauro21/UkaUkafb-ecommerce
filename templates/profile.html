@@ -113,6 +113,18 @@
             />
           </div>
         </form>
+        <div class="bottom">
+          <span>
+            Quieres borrar tu cuenta?
+            <a href="#" onclick="eliminate()"> Eliminar cuenta</a></span
+          >
+          <p>
+            No olvides las ventajas de tener cuenta:<br />
+            <br />
+            1. Guarda tus datos para futuras compras <br />
+            2. Revisa tus órdenes y sigue tus envios
+          </p>
+        </div>
       </div>
       <!-- ===== Passwords form ===== -->
       <div class="passwords-container" id="passwords">
@@ -163,6 +175,37 @@
               type="submit"
               class="submit"
               value="Cambiar contraseña"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <!-- ===== Delete account form ===== -->
+      <div class="eliminate-account-container" id="eliminate">
+        <div class="top">
+          <span>
+            Quieres cambiar tus datos personales?
+            <a href="#" onclick="profile()">Datos personales</a></span
+          >
+          <h2 class="form-title">Elimina tu cuenta</h2>
+        </div>
+        <form hx-post="/user/eliminate" hx-target="#flash" hx-swap="outerHTML">
+          <!-- Current password -->
+          <div class="input-box">
+            <input
+              name="current-password"
+              type="password"
+              class="input-field"
+              placeholder="Contraseña actual"
+              required
+            />
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="submit"
+              class="submit"
+              value="Eliminar cuenta"
               required
             />
           </div>

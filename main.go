@@ -82,6 +82,9 @@ func main() {
   r.POST("/user/password", func(c *gin.Context) {
 	  handlers.HandleChangePassword(c, db)
   })
+  r.POST("/user/eliminate",func(c *gin.Context) {
+    handlers.HandleDeleteAccount(c,db)
+  })
 
   // Dashboard
   r.GET("/admin/dashboard", func (c *gin.Context){

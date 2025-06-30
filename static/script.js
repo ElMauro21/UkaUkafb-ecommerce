@@ -7,15 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleButton = document.getElementById('toggleMenuBtn');
     const changeForm = document.getElementById('passwords');
     const profileForm = document.getElementById('profile');
+    const deleteUserForm = document.getElementById('eliminate');
 
     window.change = function () {
         profileForm?.style && (profileForm.style.display = 'none');
         changeForm?.style && (changeForm.style.display = 'block');
+        deleteUserForm?.style && (deleteUserForm.style.display = 'none');
     };
 
     window.profile = function () {
         profileForm?.style && (profileForm.style.display = 'block');
         changeForm?.style && (changeForm.style.display = 'none');
+        deleteUserForm?.style && (deleteUserForm.style.display = 'none');
+    };
+
+    window.eliminate = function () {
+        profileForm?.style && (profileForm.style.display = 'none');
+        changeForm?.style && (changeForm.style.display = 'none');
+        deleteUserForm?.style && (deleteUserForm.style.display = 'block');
     };
 
     window.login = function () {
