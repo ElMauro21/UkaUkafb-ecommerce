@@ -113,6 +113,7 @@
             />
           </div>
         </form>
+        {{ if not .isAdmin }}
         <div class="bottom">
           <span>
             Quieres borrar tu cuenta?
@@ -125,6 +126,7 @@
             2. Revisa tus órdenes y sigue tus envios
           </p>
         </div>
+        {{ end }}
       </div>
       <!-- ===== Passwords form ===== -->
       <div class="passwords-container" id="passwords">
