@@ -8,11 +8,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func HandleCreateAdminUser(db *sql.DB){
+func CreateAdminUser(db *sql.DB){
 
-	password := os.Getenv("ADMIN_PASSWOR")
+	password := os.Getenv("ADMIN_PASSWORD")
   	if password == ""{
-    	log.Fatal("ADMIN_PASSWOR is not set")
+    	log.Fatal("ADMIN_PASSWORD is not set")
   	}
 
 	name := "Admin"

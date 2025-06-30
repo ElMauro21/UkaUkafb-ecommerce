@@ -6,7 +6,7 @@ import (
 
 	"github.com/ElMauro21/UkaUkafb/database"
 	"github.com/ElMauro21/UkaUkafb/handlers"
-	"github.com/ElMauro21/UkaUkafb/handlers/admin"
+	"github.com/ElMauro21/UkaUkafb/helpers/admin"
 	"github.com/ElMauro21/UkaUkafb/jobs"
 	"github.com/ElMauro21/UkaUkafb/middleware"
 	"github.com/gin-contrib/sessions"
@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-    err := godotenv.Load()
+  err := godotenv.Load()
   if err !=nil {
     log.Println("No .env file found")
   }
@@ -50,7 +50,7 @@ func main() {
 
   jobs.JobTokenCleanup(db)
 
-  admin.HandleCreateAdminUser(db)
+  admin.CreateAdminUser(db)
 
   // Home routes
   r.GET("/",handlers.HandleOpenHome)
